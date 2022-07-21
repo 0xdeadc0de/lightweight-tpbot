@@ -27,8 +27,8 @@ class MyClient(discord.Client):
 
     async def on_ready(self):
         gunluk("atis serbest", self.user)
-        for komut in baslat:
-            self.baslat(komut)
+        for dosya in baslat:
+            self.baslat(f"botlar/{dosya}.py")
 
     async def on_message(self, message):
         
