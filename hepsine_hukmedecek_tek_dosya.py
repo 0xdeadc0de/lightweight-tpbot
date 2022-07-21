@@ -5,12 +5,17 @@ yoneticiler = [
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 klasor = r"C:\Users\Woot\Documents\GitHub\lightweight-tpbot\lightweight-tpbot\botlar"
 
-print(f"[{token_ismi}]", "merhaba dünya")
+import time
+def gunluk(*mesajlar):
+    print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{token_ismi}]:", *mesajlar)
+
+gunluk("merhaba dünya")
+import requests
 import subprocess
 import discord
 class MyClient(discord.Client):
     async def on_ready(self):
-        print(f"[{token_ismi}]", 'Atis serbest', self.user)
+        gunluk("Atis serbest", self.user)
 
     async def on_message(self, message):
         
@@ -31,10 +36,9 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!yukle "):
             dosya = message.content[7:]
-            print(dosya)
             subprocess.Popen(["py", f"{klasor}\{dosya}.py"])
             return
-            
+
 intents = discord.Intents.default()
 intents.message_content = True
 client = MyClient(intents=intents)
@@ -42,6 +46,6 @@ client = MyClient(intents=intents)
 import os
 token = os.environ.get(token_ismi)
 if token is None:
-    print(f"[{token_ismi}]", f"{token_ismi} degeri tanimli degil")
+    gunluk(f"{token_ismi} degeri tanimli degil")
     exit(-1)
 client.run(token)
