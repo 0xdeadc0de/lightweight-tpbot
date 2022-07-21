@@ -7,7 +7,7 @@ token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 import discord
 class MyClient(discord.Client):
     async def on_ready(self):
-        print('Logged on as', self.user, f"[{token_ismi}]")
+        print('Atis serbest', self.user, f"[{token_ismi}]")
 
     async def on_message(self, message):
         
