@@ -3,24 +3,25 @@ yoneticiler = [
     272044185689915392, # MrChuck
 ]
 import time
-def gunluk(*mesajlar):
-    print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{token_ismi}]:", *mesajlar)
 
-gunluk("merhaba dünya! dosyamin ismi: ", __file__)
 import discord
 import os
 class Ebeveyn(discord.Client):
     def __init__(self, token_ismi) -> None:
+        self.token_ismi = token_ismi
+        self.gunluk("merhaba dünya! dosyamin ismi: ", __file__)
         super().__init__(intents=discord.Intents.all())
         token = os.environ.get(token_ismi)
         if token is None:
-            gunluk(f"{token_ismi} degeri tanimli degil")
+            self.gunluk(f"{token_ismi} degeri tanimli degil")
             exit(-1)
-        self.token_ismi = token_ismi
         self.run(token)
 
+    def gunluk(self, *mesajlar):
+        print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{self.token_ismi}]:", *mesajlar)
+
     async def on_ready(self):
-        gunluk("atis serbest", self.user)
+        self.gunluk("atis serbest", self.user)
 
     async def on_message(self, message):
         
