@@ -14,7 +14,7 @@ import subprocess
 import discord
 class MyClient(discord.Client):
     async def on_ready(self):
-        gunluk("Atis serbest", self.user)
+        gunluk("atis serbest", self.user)
 
     async def on_message(self, message):
         
