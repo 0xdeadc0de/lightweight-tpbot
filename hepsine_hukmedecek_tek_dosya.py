@@ -6,7 +6,7 @@ py = "python"
 
 import requests
 import subprocess
-from alayina_gider import gunluk, Ebeveyn, yoneticiler
+from botlar.alayina_gider import Ebeveyn, yoneticiler
 class KaranliklarEfendisi(Ebeveyn):
     isciler = []
 
@@ -16,13 +16,13 @@ class KaranliklarEfendisi(Ebeveyn):
 
 
     async def on_ready(self):
-        super(self)
+        await super().on_ready()
 
         for dosya in baslat:
             self.baslat(f"botlar/{dosya}.py")
 
     async def on_message(self, message):
-        super(self, message)
+        await super().on_message(message)
         
         if message.author == self.user or\
            message.author.id not in yoneticiler:
@@ -36,12 +36,12 @@ class KaranliklarEfendisi(Ebeveyn):
                     isci.terminate()
                     fesih += 1
                 except:
-                    gunluk("bir isci ariza cikardi. hangisi soylemem ama")
+                    self.gunluk("bir isci ariza cikardi. hangisi soylemem ama")
                     continue
             self.isciler = []
 
             mesaj = f"{fesih}/{toplam} isci basariyla feshedildi."
-            gunluk(mesaj)
+            self.gunluk(mesaj)
             await message.channel.send(mesaj)
             return
         
@@ -55,7 +55,7 @@ class KaranliklarEfendisi(Ebeveyn):
 
             cevap = requests.get(f"{github}/{dosya}.py")
             if not cevap.ok:
-                gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
+                self.gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
                 return
 
             isim = f"gecici_{dosya}_{time.time()}.py"
@@ -65,7 +65,7 @@ class KaranliklarEfendisi(Ebeveyn):
                 dosya.flush()
                 dosya.close()
             except:
-                gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
+                self.gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
                 return
 
             self.baslat(isim)

@@ -23,7 +23,7 @@ from alayina_gider import Ebeveyn
 class Onayci(Ebeveyn):
 
     async def on_message(self, message: discord.Message):
-        super(self, message)
+        await super().on_message(message)
 
         # kullanicinin sahip oldugu tum rollerden birisi bile izinli rolde yoksa cikis yap
         if message.author == self.user or all(x.id not in izinli_roller for x in message.author.roles):
