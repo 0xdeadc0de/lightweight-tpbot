@@ -2,11 +2,9 @@ yoneticiler = [
     824573651390562325, # Kral Risitas
     272044185689915392, # MrChuck
 ]
-token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
-klasor = r"C:\Users\Woot\Documents\GitHub\lightweight-tpbot\lightweight-tpbot\botlar"
+token_ismi = "TPBOT_TOKEN_TEST"
 
 print(f"[{token_ismi}]", "merhaba dünya")
-import subprocess
 import discord
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -20,8 +18,7 @@ class MyClient(discord.Client):
 
         if message.content == '!ping':
             await message.channel.send(f'pong [{token_ismi}]')
-            return
-
+            
         if message.content.startswith("!kapan "):
             hedef = message.content[7:]
 
@@ -29,12 +26,6 @@ class MyClient(discord.Client):
                 exit(1)
             return
 
-        if message.content.startswith("!yukle "):
-            dosya = message.content[7:]
-            print(dosya)
-            subprocess.Popen(["py", f"{klasor}\{dosya}.py"])
-            return
-            
 intents = discord.Intents.default()
 intents.message_content = True
 client = MyClient(intents=intents)
