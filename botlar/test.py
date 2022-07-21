@@ -35,8 +35,7 @@ class MyClient(discord.Client):
                 exit(1)
             return
 
-intents = discord.Intents.default()
-intents.message_content=True
+intents = discord.Intents.all()
 client = MyClient(intents=intents)
 
 import os

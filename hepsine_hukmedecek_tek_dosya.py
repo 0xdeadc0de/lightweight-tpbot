@@ -90,8 +90,7 @@ class MyClient(discord.Client):
             self.baslat(isim)
             return
 
-intents = discord.Intents.default()
-intents.message_content=True
+intents = discord.Intents.all()
 client = MyClient(intents=intents)
 
 import os
