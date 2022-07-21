@@ -1,74 +1,72 @@
 baslat = [
     "onayci"
 ]
-github = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
+githubcom = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 py = "python"
 
-import requests
+from botlar.alayina_gider import Tpbot, yonetici_mi
+from discord.ext.commands import *
+bot = Tpbot("TPBOT_TOKEN_KARANLIKLAR_LORDU")
+
+isciler = []
 import subprocess
-from botlar.alayina_gider import Ebeveyn, yoneticiler
-class KaranliklarEfendisi(Ebeveyn):
+def ise_basla(dosya):
+    isci = subprocess.Popen([py, dosya])
+    isciler.append(isci)
+
+@bot.listen()
+async def on_ready():
+    for dosya in baslat:
+        ise_basla(f"botlar/{dosya}.py")
+
+
+import requests
+@bot.command()
+@check(yonetici_mi)
+async def paydos(ctx):
+    global isciler
+    fesih = 0
+    toplam = len(isciler)
+    for isci in isciler:
+        try:
+            isci.terminate()
+            fesih += 1
+        except:
+            bot.gunluk("bir isci ariza cikardi. hangisi soylemem ama")
+            continue
     isciler = []
 
-    def baslat(self, dosya):
-        isci = subprocess.Popen([py, dosya])
-        self.isciler.append(isci)
+    mesaj = f"{fesih}/{toplam} isci basariyla feshedildi."
+    bot.gunluk(mesaj)
+    await ctx.send(mesaj)
+    return
 
+@bot.command()
+@check(yonetici_mi)
+async def yukle(ctx, dosya):
+    ise_basla(f"botlar/{dosya}.py")
+    return
 
-    async def on_ready(self):
-        await super().on_ready()
+import requests
+import time
+@bot.command()
+@check(yonetici_mi)
+async def github(ctx, dosya):
+    cevap = requests.get(f"{githubcom}/{dosya}.py")
+    if not cevap.ok:
+        bot.gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
+        return
 
-        for dosya in baslat:
-            self.baslat(f"botlar/{dosya}.py")
+    isim = f"gecici_{dosya}_{time.time()}.py"
+    try:
+        dosya = open(isim, "w", encoding="UTF8")
+        dosya.write(cevap.text)
+        dosya.flush()
+        dosya.close()
+    except:
+        bot.gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. gecmis olsun. error code falan yok sana. git soguk su ic.")
+        return
 
-    async def on_message(self, message):
-        await super().on_message(message)
-        
-        if message.author == self.user or\
-           message.author.id not in yoneticiler:
-            return
+    ise_basla(isim)
 
-        if message.content == "!paydos":
-            fesih = 0
-            toplam = len(self.isciler)
-            for isci in self.isciler:
-                try:
-                    isci.terminate()
-                    fesih += 1
-                except:
-                    self.gunluk("bir isci ariza cikardi. hangisi soylemem ama")
-                    continue
-            self.isciler = []
-
-            mesaj = f"{fesih}/{toplam} isci basariyla feshedildi."
-            self.gunluk(mesaj)
-            await message.channel.send(mesaj)
-            return
-        
-        if message.content.startswith("!yukle "):
-            dosya = message.content[7:]
-            self.baslat(f"botlar/{dosya}.py")
-            return
-
-        if message.content.startswith("!github "):
-            dosya = message.content[8:]
-
-            cevap = requests.get(f"{github}/{dosya}.py")
-            if not cevap.ok:
-                self.gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
-                return
-
-            isim = f"gecici_{dosya}_{time.time()}.py"
-            try:
-                dosya = open(isim, "w", encoding="UTF8")
-                dosya.write(cevap.text)
-                dosya.flush()
-                dosya.close()
-            except:
-                self.gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
-                return
-
-            self.baslat(isim)
-            return
-
-KaranliklarEfendisi("TPBOT_TOKEN_KARANLIKLAR_LORDU")
+bot.baslat()
