@@ -7,7 +7,7 @@ izinli_roller = [
 ]
 padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lütfen sırayla cevaplayınız.
 
-1->Sunucuyu nereden(kimden,nasıl, vb..) buldunuz ?
+1->Sunucuyu nereden(kimden,nasıl,disboard vb..) buldunuz ?
 
 2->Gelme amacınız nedir?
 
@@ -18,7 +18,7 @@ padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lü
 5->Son aldığınız eğitim lise, üniv v.b (opsiyonel olarak yaş ekleyebilirsiniz)?
 
 Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
--TP Project"""
+-TP Yönetim"""
 
 import time
 def gunluk(*mesajlar):
