@@ -5,6 +5,20 @@ izinli_roller = [
     830478022183616564, #EDITOR
     826741535839748096, #ASISTAN
 ]
+padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lütfen sırayla cevaplayınız.
+
+1->Sunucuyu nereden(kimden,nasıl, vb..) buldunuz ?
+
+2->Gelme amacınız nedir?
+
+3->Programlama ile ilgileniyor musunuz?
+
+4->Neleri biliyorsunuz?
+
+5->Son aldığınız eğitim lise, üniv v.b (opsiyonel olarak yaş ekleyebilirsiniz)?
+
+Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
+-TP Project"""
 
 import time
 def gunluk(*mesajlar):
@@ -22,6 +36,7 @@ class MyClient(discord.Client):
         # kullanicinin sahip oldugu tum rollerden birisi bile izinli rolde yoksa cikis yap
         if message.author == self.user or all(x.id not in izinli_roller for x in message.author.roles):
             return
+        # bu noktadan sonra sadece izinli roller
 
         if message.content == '!ping':
             await message.channel.send(f'pong [{token_ismi}]')
@@ -34,7 +49,10 @@ class MyClient(discord.Client):
                 exit(1)
             return
 
-        # bu noktadan sonra sadece izinli roller
+        if message.content == '!hg':
+            await message.channel.send(padisah_fermani)
+            return
+            
         if message.content.startswith("!onay "):
             if len(message.mentions) > 0:
                 try:
@@ -53,6 +71,7 @@ class MyClient(discord.Client):
 
 
 intents = discord.Intents.default()
+intents.message_content=True
 client = MyClient(intents=intents)
 
 import os

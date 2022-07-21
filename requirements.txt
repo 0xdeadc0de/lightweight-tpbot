@@ -1,2 +1,2 @@
 requests
-discord.py
+git+https://github.com/Rapptz/discord.py
