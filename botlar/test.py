@@ -26,15 +26,14 @@ class MyClient(discord.Client):
             await message.channel.send(f'pong [{token_ismi}]')
             return
 
+        if message.content == "!kapan testci":
+            exit(1)
         if message.content.startswith("!kapan "):
             hedef = message.content[7:]
 
             if hedef == token_ismi:
                 exit(1)
             return
-
-        if message.content == "!kapan testci":
-            exit(1)
 
 intents = discord.Intents.default()
 client = MyClient(intents=intents)
