@@ -2,6 +2,9 @@ yoneticiler = [
     824573651390562325, # Kral Risitas
     272044185689915392, # MrChuck
 ]
+baslat = [
+    "test"
+]
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 github = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 py = "python"
@@ -17,8 +20,15 @@ import discord
 class MyClient(discord.Client):
     isciler = []
 
+    def baslat(self, dosya):
+        isci = subprocess.Popen([py, dosya])
+        self.isciler.append(isci)
+
+
     async def on_ready(self):
         gunluk("atis serbest", self.user)
+        for komut in baslat:
+            self.baslat(komut)
 
     async def on_message(self, message):
         
@@ -56,8 +66,7 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!yukle "):
             dosya = message.content[7:]
-            isci = subprocess.Popen([py, f"botlar/{dosya}.py"])
-            self.isciler.append(isci)
+            self.baslat(f"botlar/{dosya}.py")
             return
 
         if message.content.startswith("!github "):
@@ -78,7 +87,7 @@ class MyClient(discord.Client):
                 gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
                 return
 
-            subprocess.Popen([py, isim])
+            self.baslat(isim)
             return
 
 intents = discord.Intents.default()
