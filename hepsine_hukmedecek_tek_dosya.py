@@ -57,7 +57,7 @@ class MyClient(discord.Client):
                 gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
                 return
 
-            subprocess.Popen(["py", isim])
+            subprocess.Popen(["python3", isim])
             return
 
 intents = discord.Intents.default()
