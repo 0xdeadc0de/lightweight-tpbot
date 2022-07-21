@@ -3,6 +3,9 @@ izinli_roller = [
     830478022183616564, #EDITOR
     826741535839748096, #ASISTAN
 ]
+def izinli_rollu_mu(ctx):
+    return any(rol.id in izinli_roller for rol in ctx.author.roles)
+
 padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lütfen sırayla cevaplayınız.
 
 1->Sunucuyu nereden(kimden,nasıl,disboard vb..) buldunuz ?
@@ -19,34 +22,30 @@ Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız 
 -TP Yönetim"""
 
 import discord
-from alayina_gider import Ebeveyn
-class Onayci(Ebeveyn):
+from alayina_gider import Tpbot
+from discord.ext.commands import *
+bot = Tpbot("TPBOT_TOKEN_NAZGUL_1")
 
-    async def on_message(self, message: discord.Message):
-        await super().on_message(message)
+@bot.command()
+@check(izinli_rollu_mu)
+async def hg(ctx, *args):
+    await ctx.send(padisah_fermani)
 
-        # kullanicinin sahip oldugu tum rollerden birisi bile izinli rolde yoksa cikis yap
-        if message.author == self.user or all(x.id not in izinli_roller for x in message.author.roles):
-            return
-        # bu noktadan sonra sadece izinli roller
-
-        if message.content.startswith('!hg'):
-            await message.channel.send(padisah_fermani)
-            return
+@bot.command()
+@check(izinli_rollu_mu)
+async def onay(ctx):
+    if len(ctx.message.mentions) > 0:
+        try:
+            uye: discord.member.Member = ctx.message.mentions[0]
             
-        if message.content.startswith("!onay "):
-            if len(message.mentions) > 0:
-                try:
-                    uye: discord.member.Member = message.mentions[0]
-                    
-                    tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
-                    await uye.add_roles(tp_uyesi_rolu)
-                
-                    await message.add_reaction('\N{THUMBS UP SIGN}')
-                except:
-                    await message.add_reaction('\N{THUMBS DOWN SIGN}')
-            else:
-                await message.add_reaction('\N{THUMBS DOWN SIGN}')
-            await message.delete(delay=8)
+            tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
+            await uye.add_roles(tp_uyesi_rolu)
         
-Onayci("TPBOT_TOKEN_NAZGUL_1")
+            await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+        except:
+            await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+    else:
+        await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+    await ctx.message.delete(delay=8)
+
+bot.baslat()

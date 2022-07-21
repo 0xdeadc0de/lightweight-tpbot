@@ -1,13 +1,11 @@
-from alayina_gider import Ebeveyn, yoneticiler
-class Testci(Ebeveyn):
-    async def on_message(self, message):
-        await super().on_message(message)
+from alayina_gider import Tpbot, yonetici_mi
+from discord.ext.commands import *
 
-        if message.author == self.user or\
-           message.author.id not in yoneticiler:
-            return
+bot = Tpbot("TPBOT_TOKEN_TEST")
 
-        if message.content.startswith("!kapan test"):
-            exit(1)
+@bot.command()
+@check(yonetici_mi)
+async def testkapat(ctx):
+    exit(1)
 
-Testci("TPBOT_TOKEN_TEST")
+bot.baslat()
