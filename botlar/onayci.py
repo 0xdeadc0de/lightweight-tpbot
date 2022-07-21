@@ -26,12 +26,17 @@ class MyClient(discord.Client):
         # bu noktadan sonra sadece izinli roller
         if message.content.startswith("!onay "):
             if len(message.mentions) > 0:
-                uye: discord.member.Member = message.mentions[0]
+                try:
+                    uye: discord.member.Member = message.mentions[0]
+                    
+                    tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
+                    await uye.add_roles(tp_uyesi_rolu)
                 
-                tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
-                await uye.add_roles(tp_uyesi_rolu)
-            
-            await message.add_reaction('\N{THUMBS UP SIGN}')
+                    await message.add_reaction('\N{THUMBS UP SIGN}')
+                except:
+                    await message.add_reaction('\N{THUMBS DOWN SIGN}')
+            else:
+                await message.add_reaction('\N{THUMBS DOWN SIGN}')
             await message.delete(delay=5)
         
 
