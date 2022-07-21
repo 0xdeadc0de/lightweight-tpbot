@@ -26,6 +26,6 @@ client = MyClient(intents=intents)
 import os
 token = os.environ.get(token_ismi)
 if token is None:
-    print("TPBOT_TOKEN degeri tanimli degil")
+    print(f"{token_ismi} degeri tanimli degil")
     exit(-1)
 client.run(token)
