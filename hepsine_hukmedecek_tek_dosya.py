@@ -61,7 +61,6 @@ class MyClient(discord.Client):
             return
 
 intents = discord.Intents.default()
-intents.message_content = True
 client = MyClient(intents=intents)
 
 import os
