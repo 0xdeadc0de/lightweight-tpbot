@@ -4,7 +4,7 @@ yoneticiler = [
 ]
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 github = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
-py = "python3"
+py = "python"
 
 import time
 def gunluk(*mesajlar):
@@ -15,8 +15,10 @@ import requests
 import subprocess
 import discord
 class MyClient(discord.Client):
+    isciler = []
+
     async def on_ready(self):
-        gunluk("Atis serbest", self.user)
+        gunluk("atis serbest", self.user)
 
     async def on_message(self, message):
         
@@ -29,7 +31,22 @@ class MyClient(discord.Client):
             return
 
         if message.content == "!paydos":
-            exit(1)
+            fesih = 0
+            toplam = len(self.isciler)
+            for isci in self.isciler:
+                try:
+                    isci.terminate()
+                    fesih += 1
+                except:
+                    gunluk("bir isci ariza cikardi. hangisi soylemem ama")
+                    continue
+            self.isciler = []
+
+            mesaj = f"{fesih}/{toplam} isci basariyla feshedildi."
+            gunluk(mesaj)
+            await message.channel.send(mesaj)
+            return
+        
         if message.content.startswith("!kapan "):
             hedef = message.content[7:]
 
@@ -39,7 +56,8 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!yukle "):
             dosya = message.content[7:]
-            subprocess.Popen([py, f"botlar/{dosya}.py"])
+            isci = subprocess.Popen([py, f"botlar/{dosya}.py"])
+            self.isciler.append(isci)
             return
 
         if message.content.startswith("!github "):
