@@ -1,5 +1,3 @@
-token_ismi = "TPBOT_TOKEN_NAZGUL_1"
-py = "python"
 izinli_roller = [
     801135743229624320, #KURUCU
     830478022183616564, #EDITOR
@@ -20,36 +18,19 @@ padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lü
 Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
 -TP Yönetim"""
 
-import time
-def gunluk(*mesajlar):
-    print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{token_ismi}]:", *mesajlar)
-
-gunluk("merhaba dünya")
 import discord
-class MyClient(discord.Client):
-
-    async def on_ready(self):
-        gunluk("atis serbest", self.user)
+from alayina_gider import Ebeveyn
+class Onayci(Ebeveyn):
 
     async def on_message(self, message: discord.Message):
-        
+        super(self, message)
+
         # kullanicinin sahip oldugu tum rollerden birisi bile izinli rolde yoksa cikis yap
         if message.author == self.user or all(x.id not in izinli_roller for x in message.author.roles):
             return
         # bu noktadan sonra sadece izinli roller
 
-        if message.content == '!ping':
-            await message.channel.send(f'pong [{token_ismi}]')
-            return
-
-        if message.content.startswith("!kapan "):
-            hedef = message.content[7:]
-
-            if hedef == token_ismi:
-                exit(1)
-            return
-
-        if message.content == '!hg':
+        if message.content.startswith('!hg'):
             await message.channel.send(padisah_fermani)
             return
             
@@ -66,16 +47,6 @@ class MyClient(discord.Client):
                     await message.add_reaction('\N{THUMBS DOWN SIGN}')
             else:
                 await message.add_reaction('\N{THUMBS DOWN SIGN}')
-            await message.delete(delay=5)
+            await message.delete(delay=8)
         
-
-
-intents = discord.Intents.all()
-client = MyClient(intents=intents)
-
-import os
-token = os.environ.get(token_ismi)
-if token is None:
-    gunluk(f"{token_ismi} degeri tanimli degil")
-    exit(-1)
-client.run(token)
+Onayci("TPBOT_TOKEN_NAZGUL_1")
