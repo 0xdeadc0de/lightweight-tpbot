@@ -3,7 +3,7 @@ yoneticiler = [
     272044185689915392, # MrChuck
 ]
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
-klasor = r"C:\Users\Woot\Documents\GitHub\lightweight-tpbot\lightweight-tpbot\botlar"
+github = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 
 import time
 def gunluk(*mesajlar):
@@ -36,7 +36,28 @@ class MyClient(discord.Client):
 
         if message.content.startswith("!yukle "):
             dosya = message.content[7:]
-            subprocess.Popen(["py", f"{klasor}\{dosya}.py"])
+            subprocess.Popen(["py", f"botlar/{dosya}.py"])
+            return
+
+        if message.content.startswith("!github "):
+            dosya = message.content[8:]
+
+            cevap = requests.get(f"{github}/{dosya}.py")
+            if not cevap.ok:
+                gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
+                return
+
+            isim = f"gecici_{dosya}_{time.time()}.py"
+            try:
+                dosya = open(isim, "w", encoding="UTF8")
+                dosya.write(cevap.text)
+                dosya.flush()
+                dosya.close()
+            except:
+                gunluk("github yukleme sonrasi dosya olusturma basarisiz oldu. Gecmis olsun. Error code falan yok sana. Git soguk su ic.")
+                return
+
+            subprocess.Popen(["py", isim])
             return
 
 intents = discord.Intents.default()
