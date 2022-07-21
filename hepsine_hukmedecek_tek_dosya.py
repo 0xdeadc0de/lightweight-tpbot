@@ -3,7 +3,7 @@ yoneticiler = [
     272044185689915392, # MrChuck
 ]
 baslat = [
-    "test"
+    "onayci"
 ]
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 github = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
