@@ -23,6 +23,17 @@ class MyClient(discord.Client):
         if message.author == self.user or all(x.id not in izinli_roller for x in message.author.roles):
             return
 
+        if message.content == '!ping':
+            await message.channel.send(f'pong [{token_ismi}]')
+            return
+
+        if message.content.startswith("!kapan "):
+            hedef = message.content[7:]
+
+            if hedef == token_ismi:
+                exit(1)
+            return
+
         # bu noktadan sonra sadece izinli roller
         if message.content.startswith("!onay "):
             if len(message.mentions) > 0:
