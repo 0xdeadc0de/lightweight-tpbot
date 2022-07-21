@@ -1,0 +1,1 @@
+worker: python3 hepsine_hukmedecek_tek_dosya.py
