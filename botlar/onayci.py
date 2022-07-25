@@ -22,30 +22,30 @@ Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız 
 -TP Yönetim"""
 
 import discord
-from alayina_gider import Tpbot
+from alayina_gider import Cogcu, yonetici_mi
 from discord.ext.commands import *
-bot = Tpbot("TPBOT_TOKEN_NAZGUL_1")
 
-@bot.command()
-@check(izinli_rollu_mu)
-async def hg(ctx, *args):
-    await ctx.send(padisah_fermani)
+class Onayci(Cogcu): 
+    @command()
+    @check(izinli_rollu_mu)
+    async def hg(self, ctx, *args):
+        await ctx.send(padisah_fermani)
 
-@bot.command()
-@check(izinli_rollu_mu)
-async def onay(ctx):
-    if len(ctx.message.mentions) > 0:
-        try:
-            uye: discord.member.Member = ctx.message.mentions[0]
+    @command()
+    @check(izinli_rollu_mu)
+    async def onay(self, ctx):
+        if len(ctx.message.mentions) > 0:
+            try:
+                uye: discord.member.Member = ctx.message.mentions[0]
+                
+                tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
+                await uye.add_roles(tp_uyesi_rolu)
             
-            tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
-            await uye.add_roles(tp_uyesi_rolu)
-        
-            await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
-        except:
+                await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+            except:
+                await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+        else:
             await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
-    else:
-        await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
-    await ctx.message.delete(delay=8)
+        await ctx.message.delete(delay=8)
 
-bot.baslat()
+Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__)
