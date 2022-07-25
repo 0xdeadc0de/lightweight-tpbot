@@ -1,6 +1,5 @@
 baslat = [
-    "testci1",
-    "testci2",
+    "onayci",
 ]
 githubcom = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 
