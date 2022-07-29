@@ -11,6 +11,22 @@ import time
 import os
 import asyncio
 
+async def thumbs(ctx, condition):
+    if condition:
+        await thumbs_up(ctx)
+    else:
+        await thumbs_down(ctx)
+async def thumbs_up(ctx):
+    await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+async def thumbs_down(ctx):
+    await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+
+async def wave(bot, ctx):
+    react = bot.get_emoji(837392046725136424) # RISITAS HANDWAVE
+    if react is None:
+        react = '\N{Waving Hand Sign}'
+    await ctx.message.add_reaction(react)
+
 class TemelKomutlar(Cog):
     def __init__(self, token_ismi, bot):
         self.token_ismi = token_ismi
@@ -21,6 +37,13 @@ class TemelKomutlar(Cog):
     async def ping(self, ctx):
         await ctx.send(f'pong [{self.token_ismi}]')
 
+    @command(aliases=["kapat"]) 
+    @check(yonetici_mi)
+    async def kapan(self, ctx, hedef):
+        if self.bot.get_cog(hedef.capitalize()) is not None:
+            result = await self.bot.remove_cog(hedef.capitalize())
+            await thumbs(ctx, result is not None)
+
 
 class Tpbot(Bot):
     cogs = []
@@ -28,7 +51,7 @@ class Tpbot(Bot):
         self.cogs.append(TemelKomutlar(token_ismi, self))
         self.token_ismi = token_ismi
         self.gunluk("merhaba dünya!")
-        super().__init__(command_prefix="$", intents=discord.Intents.all())
+        super().__init__(command_prefix="!" if os.environ.get("TPBOT_DEBUG") is None else "$", intents=discord.Intents.all())
 
     async def baslat(self, cogcu=None):
         if cogcu:
@@ -78,26 +101,3 @@ class Cogcu(Cog):
             asyncio.create_task(rutin)
         except:
             asyncio.run(rutin)
-
-    @command()
-    @check(yonetici_mi)
-    async def kapan(self, ctx, hedef):
-        if hedef.lower() == self.cog_ismi.lower():
-            result = await self.bot.remove_cog(self.cog_ismi)
-            await self.thumbs(ctx, result is not None)
-        
-    async def thumbs(self, ctx, condition):
-        if condition:
-            await self.thumbs_up(ctx)
-        else:
-            await self.thumbs_down(ctx)
-    async def thumbs_up(self, ctx):
-        await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
-    async def thumbs_down(self, ctx):
-        await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
-
-    async def wave(self, ctx):
-        react = self.bot.get_emoji(837392046725136424) # RISITAS HANDWAVE
-        if react is None:
-            react = '\N{Waving Hand Sign}'
-        await ctx.message.add_reaction(react)

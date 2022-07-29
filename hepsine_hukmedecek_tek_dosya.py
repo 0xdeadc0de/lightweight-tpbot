@@ -8,7 +8,7 @@ from threading import Thread
 from importlib import import_module, util
 import requests
 import time, sys
-from botlar.alayina_gider import Cogcu, yonetici_mi, cogbotlar
+from botlar.alayina_gider import Cogcu, thumbs, yonetici_mi, cogbotlar
 from discord.ext.commands import *
 
 class Efendi(Cogcu):
@@ -24,9 +24,6 @@ class Efendi(Cogcu):
             return False
         import_module(hedef)
         return True
-        
-        
-        
 
     @Cog.listener()
     async def on_ready(self):
@@ -57,7 +54,7 @@ class Efendi(Cogcu):
     @command()
     @check(yonetici_mi)
     async def yukle(self, ctx, dosya):
-        await self.thumbs(ctx, self.ise_basla(dosya))
+        await thumbs(ctx, self.ise_basla(dosya))
 
     @command()
     @check(yonetici_mi)

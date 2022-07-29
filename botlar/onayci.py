@@ -22,8 +22,10 @@ Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız 
 -TP Yönetim"""
 
 import discord
-from alayina_gider import Cogcu, yonetici_mi
+from alayina_gider import Cogcu
 from discord.ext.commands import *
+
+from botlar.alayina_gider import thumbs_down, thumbs_up
 
 class Onayci(Cogcu): 
     @command()
@@ -41,11 +43,11 @@ class Onayci(Cogcu):
                 tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
                 await uye.add_roles(tp_uyesi_rolu)
             
-                await self.thumbs_up(ctx)
+                await thumbs_up(ctx)
             except:
-                await self.thumbs_down(ctx)
+                await thumbs_down(ctx)
         else:
-            await self.thumbs_down(ctx)
+            await thumbs_down(ctx)
         await ctx.message.delete(delay=8)
 
 Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__)
