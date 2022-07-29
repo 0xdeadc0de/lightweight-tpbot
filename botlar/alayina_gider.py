@@ -11,53 +11,21 @@ import time
 import os
 import asyncio
 
-cogbotlar = {}
-class Cogcu(Cog):
-    def __init__(self, token_ismi, cog_ismi):
-        self.token_ismi = token_ismi
-        self.cog_ismi = cog_ismi
-        # ekle
-        global cogbotlar
-        rutin = None
-        if token_ismi not in cogbotlar.keys():
-            cogbot = Tpbot(self.token_ismi)
-            cogbotlar[token_ismi] = cogbot
-            rutin = cogbot.baslat(self)
-            cogbot.gunluk("bot baslatildi ve cogcu eklendi =>", self.cog_ismi)
-        else:
-            cogbot = cogbotlar[token_ismi]
-            rutin = cogbot.add_cog(self)
-            cogbot.gunluk("varolan bota cogcu eklendi =>", self.cog_ismi)
-
-        try:
-            asyncio.get_running_loop()
-            asyncio.create_task(rutin)
-        except:
-            asyncio.run(rutin)
-
 class TemelKomutlar(Cog):
-    def __init__(self, token_ismi):
+    def __init__(self, token_ismi, bot):
         self.token_ismi = token_ismi
+        self.bot = bot
 
     @command()
     @check(yonetici_mi)
     async def ping(self, ctx):
         await ctx.send(f'pong [{self.token_ismi}]')
 
-    @command()
-    @check(yonetici_mi)
-    async def kapan(self, ctx, hedef):
-        if hedef == self.token_ismi:
-            react = self.bot.get_emoji(837392046725136424) # RISITAS HANDWAVE
-            if react is None:
-                react = '\N{Waving Hand Sign}'
-            await ctx.message.add_reaction(react)
-            exit(1)
 
 class Tpbot(Bot):
     cogs = []
     def __init__(self, token_ismi) -> None:
-        self.cogs.append(TemelKomutlar(token_ismi))
+        self.cogs.append(TemelKomutlar(token_ismi, self))
         self.token_ismi = token_ismi
         self.gunluk("merhaba dünya!")
         super().__init__(command_prefix="$", intents=discord.Intents.all())
@@ -78,3 +46,58 @@ class Tpbot(Bot):
 
     async def on_ready(self):
         self.gunluk("atis serbest", self.user)
+
+        
+cogbotlar : dict[str, Tpbot] = {}
+class Cogcu(Cog):
+    def __init__(self, token_ismi, cog_ismi):
+        self.token_ismi = token_ismi
+        self.cog_ismi = cog_ismi
+        
+        global cogbotlar
+        rutin = None
+        if token_ismi not in cogbotlar.keys():
+            cogbot = Tpbot(self.token_ismi)
+            cogbotlar[token_ismi] = cogbot
+            # fork and add process to cogbotlar
+            rutin = cogbot.baslat(self)
+            cogbot.gunluk("bot baslatildi ve cogcu eklendi =>", self.cog_ismi)
+        else:
+            cogbot = cogbotlar[token_ismi]
+            if cogbot.get_cog(cog_ismi) is None:
+                rutin = cogbot.add_cog(self)
+                cogbot.gunluk("varolan bota cogcu eklendi =>", self.cog_ismi)
+            else:
+                cogbot.gunluk("cogcu zaten yuklu =>", self.cog_ismi)
+                return
+
+        self.bot = cogbot
+
+        try:
+            asyncio.get_running_loop()
+            asyncio.create_task(rutin)
+        except:
+            asyncio.run(rutin)
+
+    @command()
+    @check(yonetici_mi)
+    async def kapan(self, ctx, hedef):
+        if hedef.lower() == self.cog_ismi.lower():
+            result = await self.bot.remove_cog(self.cog_ismi)
+            await self.thumbs(ctx, result is not None)
+        
+    async def thumbs(self, ctx, condition):
+        if condition:
+            await self.thumbs_up(ctx)
+        else:
+            await self.thumbs_down(ctx)
+    async def thumbs_up(self, ctx):
+        await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+    async def thumbs_down(self, ctx):
+        await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+
+    async def wave(self, ctx):
+        react = self.bot.get_emoji(837392046725136424) # RISITAS HANDWAVE
+        if react is None:
+            react = '\N{Waving Hand Sign}'
+        await ctx.message.add_reaction(react)

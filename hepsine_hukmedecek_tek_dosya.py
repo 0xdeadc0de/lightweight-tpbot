@@ -2,21 +2,31 @@ baslat = [
     "onayci",
 ]
 githubcom = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
+token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 
 from threading import Thread
-from importlib import import_module
+from importlib import import_module, util
 import requests
-import time
-from botlar.alayina_gider import Cogcu, yonetici_mi
+import time, sys
+from botlar.alayina_gider import Cogcu, yonetici_mi, cogbotlar
 from discord.ext.commands import *
 
 class Efendi(Cogcu):
     isciler = []
 
-    def ise_basla(self, dosya):
-        isci = Thread(target=import_module,args=[f"botlar.{dosya}"])
-        isci.run()
-        self.isciler.append(isci)
+    def ise_basla(self, dosya: str):
+        dosya = dosya.lower()
+        hedef = f"botlar.{dosya}"
+        if hedef in sys.modules:
+            sys.modules.pop(hedef)
+        
+        if not util.find_spec(hedef):
+            return False
+        import_module(hedef)
+        return True
+        
+        
+        
 
     @Cog.listener()
     async def on_ready(self):
@@ -28,9 +38,11 @@ class Efendi(Cogcu):
     async def paydos(self, ctx):
         fesih = 0
         toplam = len(self.isciler)
-        for isci in self.isciler:
+        for token, cogbot in cogbotlar.items():
+            if token == token_ismi:
+                continue
             try:
-                isci.join()
+                await cogbot.close()
                 fesih += 1
             except:
                 bot.gunluk("bir isci ariza cikardi. hangisi soylemem ama")
@@ -45,8 +57,7 @@ class Efendi(Cogcu):
     @command()
     @check(yonetici_mi)
     async def yukle(self, ctx, dosya):
-        self.ise_basla(dosya)
-        return
+        await self.thumbs(ctx, self.ise_basla(dosya))
 
     @command()
     @check(yonetici_mi)
@@ -56,7 +67,7 @@ class Efendi(Cogcu):
             bot.gunluk("github yuklemesi basarisiz oldu. cevap: ", cevap.status_code, cevap.reason)
             return
 
-        isim = f"gecici_{dosya}_{time.time()}"
+        isim = f"gecici_{dosya}_{time.time()}".replace(".","")
         try:
             dosya = open(f"botlar/{isim}.py", "w", encoding="UTF8")
             dosya.write(cevap.text)
@@ -68,4 +79,4 @@ class Efendi(Cogcu):
 
         self.ise_basla(isim)
 
-Efendi("TPBOT_TOKEN_KARANLIKLAR_LORDU", Efendi.__name__)
+Efendi(token_ismi, Efendi.__name__)

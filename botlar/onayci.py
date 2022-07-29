@@ -41,11 +41,11 @@ class Onayci(Cogcu):
                 tp_uyesi_rolu = discord.utils.get(uye.guild.roles, id=900647464342790204)
                 await uye.add_roles(tp_uyesi_rolu)
             
-                await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+                await self.thumbs_up(ctx)
             except:
-                await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+                await self.thumbs_down(ctx)
         else:
-            await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
+            await self.thumbs_down(ctx)
         await ctx.message.delete(delay=8)
 
 Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__)
