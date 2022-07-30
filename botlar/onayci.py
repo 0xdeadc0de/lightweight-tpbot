@@ -29,7 +29,7 @@ class Onayci(Cogcu):
 
     @Cog.listener()
     async def on_message(self, ctx):
-        if ctx.channel.id != Kanal.TpbotKomutlar.id:
+        if ctx.channel.id != Kanal.MerhabaDunya.id:
             return
 
         baslik = await ctx.create_thread(name="Onay süreci 👉")
