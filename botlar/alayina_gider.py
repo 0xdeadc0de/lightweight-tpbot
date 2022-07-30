@@ -1,3 +1,10 @@
+from enum import Enum
+from discord.ext.commands import *
+import discord
+import time
+import os
+import asyncio
+
 class idler:
     yoneticiler = [
         824573651390562325, # Kral Risitas
@@ -7,11 +14,42 @@ class idler:
 def yonetici_mi(ctx):
     return ctx.author.id in idler.yoneticiler
 
-from discord.ext.commands import *
-import discord
-import time
-import os
-import asyncio
+class TDK:
+    def miYapici(sorgu):
+        def mi(id):
+            async def kontrol(ctx):
+                return sorgu(ctx) == id
+            return lambda: check(kontrol)
+        return mi
+
+
+class Kanal:
+    mi = TDK.miYapici(lambda ctx: ctx.channel.id)
+class Kanal:
+    class TpbotTest1:
+        id = 803590557355474964
+        mi = Kanal.mi(id)
+    class TpbotTest2:
+        id = 824378307008790612
+        mi = Kanal.mi(id)
+    class TpbotKomutlar:
+        id = 852552268430966824
+        mi = Kanal.mi(id)
+    class MerhabaDunya:
+        id = 900650376762626078
+        mi = Kanal.mi(id)
+
+
+class Yonetici:
+    mi = TDK.miYapici(lambda ctx: ctx.author.id)
+class Yonetici:
+    class KralRisitas:
+        id = 824573651390562325
+        mi = Yonetici.mi(id)
+    class MrChuck:
+        id = 272044185689915392
+        mi = Yonetici.mi(id)
+
 
 async def thumbs(ctx, condition):
     if condition:
