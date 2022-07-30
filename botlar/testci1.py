@@ -1,3 +1,4 @@
+import discord
 from alayina_gider import Cogcu, yonetici_mi, Yonetici, Kanal
 from discord.ext.commands import *
 
@@ -10,6 +11,11 @@ class Testci1(Cogcu):
     @command()
     @Yonetici.KralRisitas.mi()
     async def kralping(self, ctx):
+        #uye = ctx.author
+        #for x in uye.guild.roles:
+        #    if "Bilen" in x.name:
+        #        await x.edit(name=x.name[:-6])
+        
         await ctx.send(f'kral pong')
 
     @command()

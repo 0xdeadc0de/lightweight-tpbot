@@ -54,11 +54,11 @@ class Rolcu(Cogcu):
         role = role.capitalize()
 
         role_postfix = {
-            role_type.fan_club: "Fan",
-            role_type.language: "Bilen",
+            role_type.fan_club: " Fan",
+            role_type.language: "",
         }
 
-        role_name = f"{role} {role_postfix[type]}"
+        role_name = f"{role}{role_postfix[type]}"
 
         uye = payload.member
         if uye is None:
