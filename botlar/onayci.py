@@ -22,12 +22,24 @@ Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız 
 -TP Yönetim"""
 
 import discord
-from alayina_gider import Cogcu
+from alayina_gider import Cogcu, Kanal, thumbs_down, thumbs_up
 from discord.ext.commands import *
 
-from botlar.alayina_gider import thumbs_down, thumbs_up
-
 class Onayci(Cogcu): 
+
+    @Cog.listener()
+    async def on_message(self, ctx):
+        if ctx.channel.id != Kanal.TpbotKomutlar.id:
+            return
+
+        baslik = await ctx.create_thread(name="Onay süreci 👉")
+        if baslik is None:
+            return
+
+        await baslik.send(padisah_fermani)
+        await ctx.delete()
+
+        
     @command()
     @check(izinli_rollu_mu)
     async def hg(self, ctx, *args):
