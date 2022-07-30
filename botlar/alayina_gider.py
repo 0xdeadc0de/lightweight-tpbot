@@ -45,7 +45,7 @@ class TemelKomutlar(Cog):
 
             result = self.bot.remove_cog(hedef.capitalize()) or \
                 self.bot.remove_cog(hedef.lower())
-                
+
             await thumbs(ctx, result is not None)
 
 
@@ -92,8 +92,9 @@ class Cogcu(Cog):
         else:
             cogbot = cogbotlar[token_ismi]
             if cogbot.get_cog(cog_ismi) is None:
-                rutin = cogbot.add_cog(self)
+                cogbot.add_cog(self)
                 cogbot.gunluk("varolan bota cogcu eklendi =>", self.cog_ismi)
+                return
             else:
                 cogbot.gunluk("cogcu zaten yuklu =>", self.cog_ismi)
                 return
