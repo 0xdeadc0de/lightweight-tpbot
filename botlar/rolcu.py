@@ -75,4 +75,4 @@ class Rolcu(Cogcu):
         else:
             await uye.remove_roles(tp_uyesi_rolu)
 
-Rolcu("TPBOT_TOKEN_NAZGUL_1", Rolcu.__name__.capitalize())
+Rolcu("TPBOT_TOKEN_NAZGUL_1", Rolcu.__name__.lower())

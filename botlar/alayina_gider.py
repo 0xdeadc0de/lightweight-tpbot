@@ -40,8 +40,8 @@ class TemelKomutlar(Cog):
     @command(aliases=["kapat"]) 
     @check(yonetici_mi)
     async def kapan(self, ctx, hedef):
-        if self.bot.get_cog(hedef.capitalize()) is not None:
-            result = await self.bot.remove_cog(hedef.capitalize())
+        if self.bot.get_cog(hedef.lower()) is not None:
+            result = await self.bot.remove_cog(hedef.lower())
             await thumbs(ctx, result is not None)
 
 

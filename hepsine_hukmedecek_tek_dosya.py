@@ -78,4 +78,4 @@ class Efendi(Cogcu):
 
         self.ise_basla(isim)
 
-Efendi(token_ismi, Efendi.__name__)
+Efendi(token_ismi, Efendi.__name__.lower())
