@@ -36,6 +36,11 @@ class TemelKomutlar(Cog):
 
     @command()
     @check(yonetici_mi)
+    async def echo(self, ctx, echo):
+        await ctx.send(echo)
+
+    @command()
+    @check(yonetici_mi)
     async def ping(self, ctx):
         await ctx.send(f'pong [{self.token_ismi}]')
 
