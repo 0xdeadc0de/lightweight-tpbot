@@ -57,7 +57,7 @@ class Tpbot(Bot):
         if cogcu:
             self.cogs.append(cogcu)
         for cog in self.cogs:
-            await self.add_cog(cog)
+            self.add_cog(cog)
         token = os.environ.get(self.token_ismi)
         if token is None:
             self.gunluk(f"{self.token_ismi} degeri tanimli degil")
