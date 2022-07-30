@@ -1,9 +1,11 @@
-yoneticiler = [
-    824573651390562325, # Kral Risitas
-    272044185689915392, # MrChuck
-]
+class idler:
+    yoneticiler = [
+        824573651390562325, # Kral Risitas
+        272044185689915392, # MrChuck
+    ]
+    sunucu = 698972054740795453
 def yonetici_mi(ctx):
-    return ctx.author.id in yoneticiler
+    return ctx.author.id in idler.yoneticiler
 
 from discord.ext.commands import *
 import discord
