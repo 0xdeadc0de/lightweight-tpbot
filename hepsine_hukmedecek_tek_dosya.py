@@ -6,7 +6,6 @@ baslat = [
 githubcom = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"
 
-from threading import Thread
 from importlib import import_module, util
 import requests
 import time, sys
