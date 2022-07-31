@@ -141,7 +141,7 @@ class Tpbot(Bot):
         if token is None:
             self.gunluk(f"{self.token_ismi} degeri tanimli degil")
             exit(-1)
-        self.run(token)
+        await self.start(token)
 
     def gunluk(self, *mesajlar):
         print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{self.token_ismi}]:", *mesajlar)
@@ -164,7 +164,12 @@ class Cogcu(Cog):
             cogbotlar[token_ismi] = cogbot
             # fork and add process to cogbotlar
             cogbot.gunluk("bot baslatildi ve cogcu eklendi =>", self.cog_ismi)
-            cogbot.baslat(self)
+            rutin = cogbot.baslat(self)
+            try:
+                asyncio.get_running_loop()
+                asyncio.create_task(rutin)
+            except:
+                asyncio.run(rutin)
         else:
             cogbot = cogbotlar[token_ismi]
             self.bot = cogbot
