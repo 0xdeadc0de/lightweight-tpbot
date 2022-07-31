@@ -19,7 +19,7 @@ padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lü
 5->Son aldığınız eğitim lise, üniv v.b (opsiyonel olarak yaş ekleyebilirsiniz)?
 
 Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
--TP Yönetim"""
+-TP Yönetim <@325442322986696715> <@1003360774820991026>"""
 
 import discord
 from alayina_gider import Cogcu, Kanal, thumbs_down, thumbs_up

@@ -13,8 +13,7 @@ Lütfen aşağıdaki maddeleri gözden geçirerek sorunuzun uygunluğundan emin 
 
 Sorunuzu bu başlık altında düzenlemeye devam edebilirsiniz. 
 İncelendikten sonra bir eksik yok ise sorunuz en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
--TP Yönetim
-"""
+-TP Yönetim <@325442322986696715> <@1003360774820991026>"""
 class Sorucu(Cogcu):
     @Cog.listener()
     async def on_message(self, ctx):
