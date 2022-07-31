@@ -27,7 +27,7 @@ class Rolcu(Cogcu):
             "rust", "sql", "typescript", "unity", "unrealengine", 
             "visualbasic"
         ]
-        fan_club_roles = ["ricardo", "risitas"]
+        fan_club_roles = ["ricardo", "risitas", "ibo"]
         language_roles_custom = {
             "microsoft": "mssql",
             "👢": "bootstrap",
@@ -67,7 +67,7 @@ class Rolcu(Cogcu):
                 
         tp_uyesi_rolu = discord.utils.get(uye.guild.roles, name=role_name)
         if tp_uyesi_rolu is None:
-            self.gunluk("yeni rol olusturulmadi =>", tp_uyesi_rolu)
+            self.bot.gunluk("yeni rol olusturulmadi =>", tp_uyesi_rolu)
             return
         
         if payload.event_type == "REACTION_ADD":
