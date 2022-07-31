@@ -13,7 +13,7 @@ Lütfen aşağıdaki maddeleri gözden geçirerek sorunuzun uygunluğundan emin 
 
 Sorunuzu bu başlık altında düzenlemeye devam edebilirsiniz. 
 İncelendikten sonra bir eksik yok ise sorunuz en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
--TP Yönetim <@&826741535839748096> <@&830478022183616564>
+-TP Yönetim
 """
 class Sorucu(Cogcu):
     @Cog.listener()
@@ -25,7 +25,7 @@ class Sorucu(Cogcu):
         if baslik is None:
             return
 
-        await baslik.send(padisah_fermani)
+        await baslik.send(f"<@{ctx.author.id}> "+padisah_fermani)
         await ctx.delete()
 
     @message_command(guild_ids=[idler.sunucu], name="soru kopyala")
