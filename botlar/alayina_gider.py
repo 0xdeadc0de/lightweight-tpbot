@@ -160,12 +160,14 @@ class Cogcu(Cog):
         rutin = None
         if token_ismi not in cogbotlar.keys():
             cogbot = Tpbot(self.token_ismi)
+            self.bot = cogbot
             cogbotlar[token_ismi] = cogbot
             # fork and add process to cogbotlar
-            rutin = cogbot.baslat(self)
             cogbot.gunluk("bot baslatildi ve cogcu eklendi =>", self.cog_ismi)
+            cogbot.baslat(self)
         else:
             cogbot = cogbotlar[token_ismi]
+            self.bot = cogbot
             if cogbot.get_cog(cog_ismi) is None:
                 cogbot.add_cog(self)
                 cogbot.gunluk("varolan bota cogcu eklendi =>", self.cog_ismi)
@@ -173,8 +175,6 @@ class Cogcu(Cog):
             else:
                 cogbot.gunluk("cogcu zaten yuklu =>", self.cog_ismi)
                 return
-
-        self.bot = cogbot
 
         try:
             asyncio.get_running_loop()
