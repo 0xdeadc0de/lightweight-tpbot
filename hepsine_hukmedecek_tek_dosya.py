@@ -2,6 +2,7 @@ baslat = [
     "onayci",
     "baslikci",
     "rolcu",
+    "sorucu",
 ]
 githubcom = r"https://raw.githubusercontent.com/0xdeadc0de/lightweight-tpbot/main/botlar"
 token_ismi = "TPBOT_TOKEN_KARANLIKLAR_LORDU"

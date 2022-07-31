@@ -38,6 +38,9 @@ class Kanal:
     class MerhabaDunya:
         id = 900650376762626078
         mi = Kanal.mi(id)
+    class SoruSor:
+        id = 1003249327117979739
+        mi = Kanal.mi(id)
 
 
 class Yonetici:
