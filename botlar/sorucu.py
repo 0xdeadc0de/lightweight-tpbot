@@ -1,6 +1,9 @@
+import io
 import discord
-from alayina_gider import Cogcu, Kanal
+from alayina_gider import Cogcu, Kanal, idler, Rol
+from discord.commands import *
 from discord.ext.commands import *
+
 padisah_fermani = """Bu başlık altından sorunuzu sorunuz.
 Lütfen aşağıdaki maddeleri gözden geçirerek sorunuzun uygunluğundan emin olun. Bu yayınlanma sürecini hızlandıracaktır.
 
@@ -24,5 +27,13 @@ class Sorucu(Cogcu):
 
         await baslik.send(padisah_fermani)
         await ctx.delete()
+
+    @message_command(guild_ids=[idler.sunucu], name="soru kopyala")
+    @Rol.AsistanEditorKurucuMu()
+    async def caliskanim(self, ctx: discord.ApplicationContext, message):
+        yazi=message.content
+        baytlarlaylay = yazi.encode(encoding="utf8")
+        fp=io.BytesIO(baytlarlaylay)
+        await ctx.respond(file=discord.File(fp, "mesaj.txt"), ephemeral=True)
 
 Sorucu("TPBOT_TOKEN_NAZGUL_1", Sorucu.__name__.lower())

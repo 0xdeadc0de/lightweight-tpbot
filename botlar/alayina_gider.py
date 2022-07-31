@@ -22,6 +22,13 @@ class TDK:
             return lambda: check(kontrol)
         return mi
 
+    def varMiYapici(sorgu):
+        def mi(id):
+            async def kontrol(ctx):
+                return id in sorgu(ctx)
+            return lambda: check(kontrol)
+        return mi
+
 
 class Kanal:
     mi = TDK.miYapici(lambda ctx: ctx.channel.id)
@@ -52,6 +59,26 @@ class Yonetici:
     class MrChuck:
         id = 272044185689915392
         mi = Yonetici.mi(id)
+
+
+class Rol:
+    varMi = TDK.varMiYapici(lambda ctx: ctx.author.roles)
+class Rol:
+    class Asistan:
+        id = 826741535839748096
+        varMi = Rol.varMi(id)
+    class Editor:
+        id = 830478022183616564
+        VarMi = Rol.varMi(id)
+    class Kurucu:
+        id = 801135743229624320
+        VarMi = Rol.varMi(id)
+
+        
+    def AsistanEditorKurucuMu():
+        async def kontrol(ctx):
+            return any(rol.id in [Rol.Asistan.id,Rol.Editor.id,Rol.Kurucu.id] for rol in ctx.author.roles)
+        return check(kontrol)
 
 
 async def thumbs(ctx, condition):
