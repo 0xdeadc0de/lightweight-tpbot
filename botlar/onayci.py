@@ -43,7 +43,7 @@ class Onayci(Cogcu):
     @command()
     @check(izinli_rollu_mu)
     async def hg(self, ctx, *args):
-        await ctx.send(padisah_fermani)
+        await ctx.send(f"<@{ctx.author.id}> "+padisah_fermani)
 
     @command()
     @check(izinli_rollu_mu)
