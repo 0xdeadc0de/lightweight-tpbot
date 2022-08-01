@@ -43,9 +43,9 @@ class Baslayacagim(Cogcu):
             await geriCagrimOlusturucu(self.bot, select, interaction, [
                 (Baslayacagim.AkisParaKazanmak, "İş arayıp iş sahibi olarak mı yoksa bir fikir üzerinden mi?"),
 
-                (Baslayacagim.AkisBaslangic, "Bu secenek tasarlanıyor 2"),
-                (Baslayacagim.AkisBaslangic, "Bu secenek tasarlanıyor 3"),
-                (Baslayacagim.AkisBaslangic, "Bu secenek tasarlanıyor 4"),
+                Yol.FikrinVarMi,
+                Yol.FikrinVarMi,
+                Yol.FikrinVarMi,
 
                 (Diller.Python, "Python ile temel öğrenip yazılıma devam edebilirsiniz."),
                 (Diller.Python, "Sıfırdan başlayıp Python öğrenin."),
@@ -62,7 +62,7 @@ class Baslayacagim(Cogcu):
         async def select_callback(self, select, interaction):
             await geriCagrimOlusturucu(self.bot, select, interaction, [
                 (Baslayacagim.IsBulmak, "Hangi alanda?"),
-                (Baslayacagim.Startup, "Hangi alanda?"),
+                Yol.Startup
             ])
 
     class IsBulmak(discord.ui.View):
@@ -227,6 +227,52 @@ class Baslayacagim(Cogcu):
                 (Diller.Php, Yazi.Sonuc),
             ])
 
+    class FikrinVarMi(discord.ui.View):
+        def __init__(self, *items, timeout = 180, bot = None):
+            super().__init__(*items, timeout=timeout)
+            self.bot = bot
+        @secenekOlusturucu([
+            ("Yok. Sadece başlamak istiyorum.", ""),
+            ("Evet var.", ""),
+        ])  
+        async def select_callback(self, select, interaction):
+            await geriCagrimOlusturucu(self.bot, select, interaction, [
+                (Baslayacagim.Tercihim, "İşimi..."),
+                Yol.Startup
+            ])
+
+    class Tercihim(discord.ui.View):
+        def __init__(self, *items, timeout = 180, bot = None):
+            super().__init__(*items, timeout=timeout)
+            self.bot = bot
+        @secenekOlusturucu([
+            ("...kolay yoldan yapmayı tercih ederim.", ""),
+            ("...en iyi yoldan yapmayı tercih ederim.", ""),
+            ("...biraz zor yoldan yapmayı tercih ederim.", ""),
+            ("...ciddi anlamda en zor yoldan yapmayı tercih ederim.", "(diğer dilin özelliklerini öğrenmek gittikçe kolaylaşacaktır)"),
+        ])  
+        async def select_callback(self, select, interaction):
+            await geriCagrimOlusturucu(self.bot, select, interaction, [
+                (Diller.Python, Yazi.Sonuc),
+                (Diller.Python, Yazi.Sonuc),
+                (Baslayacagim.Arabam, "Düz mü otomatik vites mi?"),
+                (Diller.Php, Yazi.Sonuc),
+            ])
+
+    class Arabam(discord.ui.View):
+        def __init__(self, *items, timeout = 180, bot = None):
+            super().__init__(*items, timeout=timeout)
+            self.bot = bot
+        @secenekOlusturucu([
+            ("Otomatik", ""),
+            ("Düz", ""),
+        ])  
+        async def select_callback(self, select, interaction):
+            await geriCagrimOlusturucu(self.bot, select, interaction, [
+                (Diller.Java, Yazi.Sonuc),
+                (Diller.C, Yazi.Sonuc),
+            ])
+
 ################################################################################
 
     @slash_command(description="programlamaya başlamak istiyor ve nereden başlayacağınızı bilmiyorsanız hemen bu komutu çalıştırın!")
@@ -239,5 +285,7 @@ class Yol():
     Kurumsal = (Baslayacagim.Kurumsal, "Microsoft hakkında ne düşünüyorsunuz?")
     YuksekPotansiyel = (Baslayacagim.YuksekPotansiyel, "Potansiyeli yüksek fakat olgunlaşmamış bir dil öğrenmek ister misiniz?")
     FavoriOyuncak = (Baslayacagim.FavoriOyuncak, "Favori oyuncağınız hangisi?")
+    FikrinVarMi = (Baslayacagim.FikrinVarMi, "Aklınızda bir fikir veya platform var mı?")
+    Startup = (Baslayacagim.Startup, "Hangi alanda?"),
 
 Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())

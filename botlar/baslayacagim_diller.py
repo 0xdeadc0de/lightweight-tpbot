@@ -209,3 +209,31 @@ Nerdeyse tüm web hosting firmaları tarafından düşük ücretle desteklenmekt
             )
             embed.set_thumbnail(url="https://i.imgur.com/U5bWF9E.png")
             await interaction.response.edit_message(view=None, content=Yazi.KartBaslik, embed=embed)
+
+    class C(discord.ui.View):    
+        @discord.ui.button(label=__qualname__[7:]+Yazi.Kesfet, style=discord.ButtonStyle.success, emoji=Yazi.KesfetEmoji) 
+        async def button_callback(self, button, interaction):
+            embed = discord.Embed(
+                title=__class__.__name__+" dili Güç yüzüğü",
+                description=
+f"`Zorluk: {Yazi.Yildiz[4]}`\n"+
+"""
+Tek yüzüğün gücü herkes tarafından bilinir.
+
+Herkes bu güce sahip olmak ister.
+
+Programlama dillerinin de-fakto standartıdır.
+
+Dünya çapında bilinen eski ve yaygın kullanılmış bir dildir.
+
+Sistem ve donanım programlamada popülerdir.
+
+Birkaç detay dışında C++ diliyle uyumludur. C++'in babasıdır.
+""",
+                fields=[
+                    discord.EmbedField(name=Yazi.Populerlik,value=f"`{Yazi.Yildiz[4]}`",inline=True),
+                    discord.EmbedField(name=Yazi.Yapiminda,value="Wordpress, Wikipedia, Flickr",inline=True),
+                ]
+            )
+            embed.set_thumbnail(url="https://i.imgur.com/jK7Pf55.png")
+            await interaction.response.edit_message(view=None, content=Yazi.KartBaslik, embed=embed)
