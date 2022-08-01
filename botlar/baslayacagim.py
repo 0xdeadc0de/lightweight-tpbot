@@ -286,6 +286,6 @@ class Yol():
     YuksekPotansiyel = (Baslayacagim.YuksekPotansiyel, "Potansiyeli yüksek fakat olgunlaşmamış bir dil öğrenmek ister misiniz?")
     FavoriOyuncak = (Baslayacagim.FavoriOyuncak, "Favori oyuncağınız hangisi?")
     FikrinVarMi = (Baslayacagim.FikrinVarMi, "Aklınızda bir fikir veya platform var mı?")
-    Startup = (Baslayacagim.Startup, "Hangi alanda?"),
+    Startup = (Baslayacagim.Startup, "Hangi alanda?")
 
 Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())
