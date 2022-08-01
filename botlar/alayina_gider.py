@@ -5,6 +5,11 @@ import time
 import os
 import asyncio
 
+def interaction_member(interaction: discord.Interaction) -> None | discord.Member:
+    if interaction.guild is None:
+        return None
+    return discord.utils.get(interaction.guild.members, id=interaction.user.id)
+
 class idler:
     yoneticiler = [
         824573651390562325, # Kral Risitas
