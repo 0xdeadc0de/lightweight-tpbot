@@ -232,7 +232,7 @@ Birkaç detay dışında C++ diliyle uyumludur. C++'in babasıdır.
 """,
                 fields=[
                     discord.EmbedField(name=Yazi.Populerlik,value=f"`{Yazi.Yildiz[4]}`",inline=True),
-                    discord.EmbedField(name=Yazi.Yapiminda,value="Wordpress, Wikipedia, Flickr",inline=True),
+                    discord.EmbedField(name=Yazi.Yapiminda,value="İşletim sistemileri ve donanım",inline=True),
                 ]
             )
             embed.set_thumbnail(url="https://i.imgur.com/jK7Pf55.png")
