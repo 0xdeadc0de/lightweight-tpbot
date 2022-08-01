@@ -120,7 +120,7 @@ class Baslayacagim(Cogcu):
                 (Diller.Cpp, Yazi.Sonuc),
                 Yol.Mobil,
                 Yol.Kurumsal,
-                (Baslayacagim.WebStartup, "Startup fikriniz gerçek zamanlı veri işliyor mu (twitter gibi)?"),
+                (Baslayacagim.WebStartup, "Fikriniz gerçek zamanlı veri işliyor mu (twitter gibi)?"),
             ])
             
     class WebStartup(discord.ui.View):
