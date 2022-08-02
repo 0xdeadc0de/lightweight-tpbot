@@ -36,7 +36,7 @@ class Onayci(Cogcu):
         if baslik is None:
             return
 
-        await baslik.send(padisah_fermani)
+        await self.hg(baslik)
         await ctx.delete()
 
         
