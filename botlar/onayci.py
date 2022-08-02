@@ -36,14 +36,14 @@ class Onayci(Cogcu):
         if baslik is None:
             return
 
-        await self.hg(baslik)
+        await baslik.send(f"<@{ctx.author.id}> "+padisah_fermani)
         await ctx.delete()
 
         
     @command()
     @check(izinli_rollu_mu)
     async def hg(self, ctx, *args):
-        await ctx.send(f"<@{ctx.author.id}> "+padisah_fermani)
+        await ctx.send(padisah_fermani)
 
     @command()
     @check(izinli_rollu_mu)
