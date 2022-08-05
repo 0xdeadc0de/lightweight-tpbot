@@ -256,7 +256,7 @@ class Baslayacagim(Cogcu):
                 (Diller.Python, Yazi.Sonuc),
                 (Diller.Python, Yazi.Sonuc),
                 (Baslayacagim.Arabam, "Düz mü otomatik vites mi?"),
-                (Diller.Php, Yazi.Sonuc),
+                (Diller.Cpp, Yazi.Sonuc),
             ])
 
     class Arabam(discord.ui.View):
