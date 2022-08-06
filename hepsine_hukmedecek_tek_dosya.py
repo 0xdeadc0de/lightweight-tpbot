@@ -1,4 +1,5 @@
 baslat = [
+    "arayuz_nazgul",
     "onayci",
     "baslikci",
     "rolcu",

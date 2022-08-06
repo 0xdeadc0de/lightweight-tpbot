@@ -7,7 +7,7 @@ from kartci import Kartci
 class ArayuzNazgul(Arayuzcu):
     
     baslik = ""
-    kanal_id = Kanal.BotKomutlar.id
+    kanal_id = Kanal.NazgulRicardo.id
     def embedler(self):
         return([embed_sohbet(self.bot.user, 
             dis_ses=f"""_Yol üzerinde yürürken birden etrafını karanlıklar sardı ve yolunu süliyeti belirsiz bir atlı sürücü kesiverdi.

@@ -87,6 +87,9 @@ class Kanal:
     class BugunNeYaptim:
         id = 867492591825190932
         mi = Kanal.mi(id)
+    class NazgulRicardo:
+        id = 1005537084267831407
+        mi = Kanal.mi(id)
 
         
 
