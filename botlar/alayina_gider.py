@@ -8,7 +8,7 @@ import asyncio
 def embed_sohbet(sahis: discord.User, dis_ses="", konusma=None, resim=None):
     embed=discord.Embed(description=dis_ses)
     if konusma is not None:
-        embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{konusma}```")
+        embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{konusma}```", inline=False)
     embed.set_thumbnail(url=sahis.avatar.url)
     #embed.set_author(name=sahis.display_name, icon_url=sahis.display_avatar.url)
     if resim is not None:
@@ -83,6 +83,13 @@ class Kanal:
         mi = Kanal.mi(id)
     class BotKomutlar:
         id = 841987730551603200
+        mi = Kanal.mi(id)
+    class GununSorusu:
+        id = 875276994949054554
+        mi = Kanal.mi(id)
+
+    class Bumperado:
+        id = 782742548052574239
         mi = Kanal.mi(id)
     class BugunNeYaptim:
         id = 867492591825190932
