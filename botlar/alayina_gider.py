@@ -5,6 +5,11 @@ import time
 import os
 import asyncio
 
+def sunucu_uyesi(ctx: discord.ApplicationContext, id: int) -> None | discord.Member:
+    if ctx.guild is None:
+        return None
+    return discord.utils.get(ctx.guild.members, id=id)
+
 def interaction_member(interaction: discord.Interaction) -> None | discord.Member:
     if interaction.guild is None:
         return None
@@ -16,8 +21,14 @@ class idler:
         272044185689915392, # MrChuck
     ]
     sunucu = 698972054740795453
+    paylasimlar = 832158366541283358
 def yonetici_mi(ctx):
     return ctx.author.id in idler.yoneticiler
+
+def TurkProgramcilar():
+    async def kontrol(ctx):
+        return ctx.guild.id == idler.sunucu
+    return check(kontrol)
 
 class TDK:
     def miYapici(sorgu):
@@ -52,6 +63,9 @@ class Kanal:
         mi = Kanal.mi(id)
     class SoruSor:
         id = 1003249327117979739
+        mi = Kanal.mi(id)
+    class BotKomutlar:
+        id = 841987730551603200
         mi = Kanal.mi(id)
 
 
@@ -102,6 +116,16 @@ async def wave(bot, ctx):
         react = '\N{Waving Hand Sign}'
     await ctx.message.add_reaction(react)
 
+def gunluk(token_ismi, *mesajlar):
+    print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{token_ismi}]:", *mesajlar)
+
+def ortamaBirBak(isim):
+    deger = os.environ.get(isim)
+    if deger is None:
+        gunluk(isim, f"{isim} degeri tanimli degil")
+        exit(-1)
+    return deger
+
 class TemelKomutlar(Cog):
     def __init__(self, token_ismi, bot):
         self.token_ismi = token_ismi
@@ -142,14 +166,11 @@ class Tpbot(Bot):
             self.cogs.append(cogcu)
         for cog in self.cogs:
             self.add_cog(cog)
-        token = os.environ.get(self.token_ismi)
-        if token is None:
-            self.gunluk(f"{self.token_ismi} degeri tanimli degil")
-            exit(-1)
+        token = ortamaBirBak(self.token_ismi)
         await self.start(token)
 
     def gunluk(self, *mesajlar):
-        print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{self.token_ismi}]:", *mesajlar)
+        gunluk(self.token_ismi, *mesajlar)
 
     async def on_ready(self):
         self.gunluk("atis serbest", self.user)
