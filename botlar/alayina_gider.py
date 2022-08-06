@@ -67,6 +67,11 @@ class Kanal:
     class BotKomutlar:
         id = 841987730551603200
         mi = Kanal.mi(id)
+    class BugunNeYaptim:
+        id = 867492591825190932
+        mi = Kanal.mi(id)
+
+        
 
 
 class Yonetici:

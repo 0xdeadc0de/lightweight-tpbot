@@ -61,8 +61,13 @@ class Ekonomici(Cogcu):
 
             self.mesajcilar[msg.author.id] += ricardo_coin
 
+
         if msg.channel.category_id == idler.paylasimlar:
             self.risitas_coin_ver(1)
+            return
+
+        if msg.channel.id == Kanal.BugunNeYaptim.id:
+            self.risitas_coin_ver(500)
             return
 
 
