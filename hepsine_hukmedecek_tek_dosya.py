@@ -16,7 +16,7 @@ import requests
 import time, sys
 from botlar.alayina_gider import Cogcu, thumbs, yonetici_mi, cogbotlar
 from discord.ext.commands import *
-
+first = True
 class Efendi(Cogcu):
     isciler = []
 
@@ -33,6 +33,8 @@ class Efendi(Cogcu):
 
     @Cog.listener()
     async def on_ready(self):
+        global first
+        if not first: return; first = False
         for dosya in baslat:
             self.ise_basla(dosya)
             

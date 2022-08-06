@@ -13,10 +13,12 @@ import random
 def sans(yuzde):
     """100% verildiginde random.random() hicbir zaman 100u gecemeyeceginden hep true doner"""
     return random.random() < yuzde
-
+first=True
 class Ekonomici(Cogcu):
     @Cog.listener()
     async def on_ready(self):
+        global first
+        if not first: return; first = False
         self.mango = Mangocu()
         self.mesajcilar = defaultdict(int)
         self.guncelle.start()
