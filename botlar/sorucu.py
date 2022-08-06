@@ -35,4 +35,7 @@ class Sorucu(Cogcu):
         fp=io.BytesIO(baytlarlaylay)
         await ctx.respond(file=discord.File(fp, "mesaj.txt"), ephemeral=True)
 
-Sorucu("TPBOT_TOKEN_NAZGUL_1", Sorucu.__name__.lower())
+def main():
+    Sorucu("TPBOT_TOKEN_NAZGUL_1", Sorucu.__name__.lower())
+if __name__ == "__main__":
+    main()

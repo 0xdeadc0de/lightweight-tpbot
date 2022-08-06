@@ -28,4 +28,7 @@ class Testci1(Cogcu):
     async def test(self, ctx):
         await ctx.send("sadece tpbottest1 kanalinda calisir")
 
-Testci1("TPBOT_TOKEN_TEST", Testci1.__name__.lower())
+def main():
+    Testci1("TPBOT_TOKEN_TEST", Testci1.__name__.lower())
+if __name__ == "__main__":
+    main()

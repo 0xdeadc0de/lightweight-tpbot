@@ -151,4 +151,7 @@ class Rolcu(Cogcu):
         else:
             await uye.remove_roles(tp_uyesi_rolu)
 
-Rolcu("TPBOT_TOKEN_NAZGUL_1", Rolcu.__name__.lower())
+def main():
+    Rolcu("TPBOT_TOKEN_NAZGUL_1", Rolcu.__name__.lower())
+if __name__ == "__main__":
+    main()

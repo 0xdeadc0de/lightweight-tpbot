@@ -145,4 +145,7 @@ class Ekonomici(Cogcu):
         else:
             raise error
 
-Ekonomici("TPBOT_TOKEN_BAKKAL", Ekonomici.__name__.lower())
+def main():
+    Ekonomici("TPBOT_TOKEN_BAKKAL", Ekonomici.__name__.lower())
+if __name__ == "__main__":
+    main()

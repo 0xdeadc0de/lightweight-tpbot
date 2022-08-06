@@ -27,7 +27,7 @@ class Efendi(Cogcu):
         
         if not util.find_spec(hedef):
             return False
-        import_module(hedef)
+        import_module(hedef).main()
         return True
 
     @Cog.listener()

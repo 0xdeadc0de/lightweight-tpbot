@@ -64,4 +64,7 @@ class Onayci(Cogcu):
         if ctx.channel.parent_id == Kanal.MerhabaDunya.id:
            await ctx.channel.archive(locked=True)
 
-Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__.lower())
+def main():
+    Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__.lower())
+if __name__ == "__main__":
+    main()

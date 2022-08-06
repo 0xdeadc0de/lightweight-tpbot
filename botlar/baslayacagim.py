@@ -288,4 +288,8 @@ class Yol():
     FikrinVarMi = (Baslayacagim.FikrinVarMi, "Aklınızda bir fikir veya platform var mı?")
     Startup = (Baslayacagim.Startup, "Hangi alanda?")
 
+
+def main():
 Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())
+if __name__ == "__main__":
+    main()

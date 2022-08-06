@@ -9,4 +9,7 @@ class Baslikci(Cogcu):
             return
         await ctx.create_thread(name="Yorumlar 👉")
 
-Baslikci("TPBOT_TOKEN_NAZGUL_1", Baslikci.__name__.lower())
+def main():
+    Baslikci("TPBOT_TOKEN_NAZGUL_1", Baslikci.__name__.lower())
+if __name__ == "__main__":
+    main()
