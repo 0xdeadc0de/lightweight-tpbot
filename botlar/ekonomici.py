@@ -66,11 +66,11 @@ class Ekonomici(Cogcu):
 
 
         if msg.channel.category_id == idler.paylasimlar:
-            self.risitas_coin_ver(1)
+            self.risitas_coin_ver(msg.author.id, 1)
             return
 
         if msg.channel.id == Kanal.BugunNeYaptim.id:
-            self.risitas_coin_ver(500)
+            self.risitas_coin_ver(msg.author.id, 500)
             return
 
 
