@@ -55,8 +55,8 @@ sunucu içerisinde örnek bir üye olmaktır."""))
         async def _2(self, button, interaction: discord.Interaction):
             await interaction.response.send_message(
                 ephemeral=True,
-                embed=embed_sohbet(self.bot.user,  dis_ses=
-f"""`{self.bot.user.display_name}:`
+                embed=embed_sohbet(self.bot.user, resim="https://media3.giphy.com/media/KDhwDeTh245v0KnLeO/giphy.gif?cid=790b76112668610765b6d60a5705d3bb0444059d47b21582&rid=giphy.gif&ct=g",
+                 dis_ses=f"""`{self.bot.user.display_name}:`
 Hmm. Gözlerim beni yanıltmıyorsa bunlar El Risitas krallığına ait dinarlar olsa gerek. 
 
 Şu tarafta toparlanmış olanlar da Nazgul Ricardo'ya ait para birimi.
