@@ -230,7 +230,8 @@ class Cogcu(Cog):
         else:
             cogbot = cogbotlar[token_ismi]
             self.bot = cogbot
-            if cogbot.get_cog(cog_ismi) is None:
+            if cogbot.get_cog(self.qualified_name) is None:
+                #cogbot.remove_cog(self.qualified_name)
                 cogbot.add_cog(self)
                 cogbot.gunluk("varolan bota cogcu eklendi =>", self.cog_ismi)
                 return
