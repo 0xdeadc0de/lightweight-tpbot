@@ -90,6 +90,9 @@ class Kanal:
     class NazgulRicardo:
         id = 1005537084267831407
         mi = Kanal.mi(id)
+    class BakkalRisitas:
+        id = 1005547627259113542
+        mi = Kanal.mi(id)
 
         
 
@@ -255,5 +258,5 @@ class Arayuzcu(Cogcu):
         async for msg in channel.history(limit=10):
             if msg is not None and msg.author.id == self.bot.user.id:
                 await msg.delete()
-        await channel.send(content=self.baslik+(f" `{datetime.datetime.now()}`" if DEBUG() else ""), embeds=self.embedler(), view=self.Arayuz(bot=self.bot))
-                return
+                await channel.send(content=self.baslik+(f" `{datetime.datetime.now()}`" if DEBUG() else ""), embeds=self.embedler(), view=self.Arayuz(bot=self.bot))
+                break
