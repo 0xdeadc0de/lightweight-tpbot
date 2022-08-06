@@ -60,6 +60,5 @@ class Onayci(Cogcu):
                 await thumbs_down(ctx)
         else:
             await thumbs_down(ctx)
-        await ctx.message.delete(delay=8)
 
 Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__.lower())
