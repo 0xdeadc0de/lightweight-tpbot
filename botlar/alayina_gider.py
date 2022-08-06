@@ -165,7 +165,8 @@ class Tpbot(Bot):
         if cogcu:
             self.cogs.append(cogcu)
         for cog in self.cogs:
-            self.add_cog(cog)
+            if self.get_cog(cog.qualified_name) is None:
+                self.add_cog(cog)
         token = ortamaBirBak(self.token_ismi)
         await self.start(token)
 
