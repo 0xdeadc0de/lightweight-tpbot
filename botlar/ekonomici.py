@@ -29,12 +29,13 @@ class Ekonomici(Cogcu):
     @Cog.listener()
     @TurkProgramcilar()
     async def on_message(self, msg: discord.Message):
+        #msg=await msg.channel.fetch_message(1005461178312564736)
         if msg.author.bot:
             # DISBOARD
             if msg.author.id != 302050872383242240:
                 return
 
-            if msg.embeds[0].title != 'DISBOARD: Sunucu Listesi':
+            if msg.embeds[0].image.url != "https://disboard.org/images/bot-command-image-bump.png":
                 return
 
             rsc=100
