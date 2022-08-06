@@ -31,7 +31,9 @@ Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını san
                 ephemeral=True,
                 embed=embed_sohbet(self.bot.user, konusma=
 """Öncelikle sihirli bir kart oynamak için yeterli gücün olduğuna emin olmalısın.
+
 Daha sonra kart numaranı belirledikten sonra /kart yazıp oynamak istediğin kart numarasını yazmalısın.
+
 Kart numaraları hakkında bilgi almak için /deste komutunu kullanabilirsin veya istediğin zaman bana sorabilirsin."""))
 
         @discord.ui.button(label="Sihirli kart numaraları hakkında bilgin var mı?", style=discord.ButtonStyle.secondary, row=1)
