@@ -258,5 +258,5 @@ class Arayuzcu(Cogcu):
         async for msg in channel.history(limit=10):
             if msg is not None and msg.author.id == self.bot.user.id:
                 await msg.delete()
-                await channel.send(content=self.baslik+(f" `{datetime.datetime.now()}`" if DEBUG() else ""), embeds=self.embedler(), view=self.Arayuz(bot=self.bot))
+                mesaj = await channel.send(content=self.baslik+(f" `{datetime.datetime.now()}`" if DEBUG() else ""), embeds=self.embedler(), view=self.Arayuz(bot=self.bot,timeout=None))
                 break
