@@ -46,6 +46,7 @@ class Ekonomici(Cogcu):
             embed.add_field(name="`Risitas Coin (RSC)`", value=f"```{rsc}```")
             embed.set_thumbnail(url=self.bot.user.avatar.url)
             embed.set_author(name=msg.interaction.user.display_name, icon_url=msg.interaction.user.display_avatar.url)
+            embed.set_image(url="https://i.imgur.com/fi3lnEw.png")
             await msg.channel.send(embed=embed)
 
             return
