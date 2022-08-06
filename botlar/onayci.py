@@ -47,7 +47,7 @@ class Onayci(Cogcu):
 
     @command()
     @check(izinli_rollu_mu)
-    async def onay(self, ctx):
+    async def onay(self, ctx: Context):
         if len(ctx.message.mentions) > 0:
             try:
                 uye: discord.member.Member = ctx.message.mentions[0]
@@ -60,5 +60,8 @@ class Onayci(Cogcu):
                 await thumbs_down(ctx)
         else:
             await thumbs_down(ctx)
+
+        if ctx.channel.parent_id == Kanal.MerhabaDunya.id:
+           await ctx.channel.archive(locked=True)
 
 Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__.lower())
