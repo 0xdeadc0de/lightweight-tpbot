@@ -5,6 +5,17 @@ import time
 import os
 import asyncio
 
+def embed_sohbet(sahis: discord.User, dis_ses="", konusma=None, resim=None):
+    embed=discord.Embed(description=dis_ses)
+    if konusma is not None:
+        embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{konusma}```")
+    embed.set_thumbnail(url=sahis.avatar.url)
+    #embed.set_author(name=sahis.display_name, icon_url=sahis.display_avatar.url)
+    if resim is not None:
+        embed.set_image(url=resim)
+    return embed
+        
+
 def cevap(ctx):
     if type(ctx) is discord.interactions.Interaction:
         return ctx.response.send_message
