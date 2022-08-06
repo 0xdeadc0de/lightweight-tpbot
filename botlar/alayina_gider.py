@@ -5,6 +5,12 @@ import time
 import os
 import asyncio
 
+def cevap(ctx):
+    if type(ctx) is discord.interactions.Interaction:
+        return ctx.response.send_message
+    else:
+        return ctx.respond
+
 def sunucu_uyesi(ctx: discord.ApplicationContext, id: int) -> None | discord.Member:
     if ctx.guild is None:
         return None

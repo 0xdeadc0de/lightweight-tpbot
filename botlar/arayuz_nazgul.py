@@ -2,6 +2,7 @@ from alayina_gider import Arayuzcu, Kanal
 from discord.ext.commands import *
 import discord
 from baslayacagim import Baslayacagim
+from kartci import Kartci
 
 class ArayuzNazgul(Arayuzcu):
     
@@ -12,7 +13,7 @@ class ArayuzNazgul(Arayuzcu):
             description=
 f"""_Yol üzerinde yürürken birden etrafını karanlıklar sardı ve yolunu süliyeti belirsiz bir atlı sürücü kesiverdi.
 Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını sana doğru çevirdi ve gülümsedi_
-`{self.bot.user.display_name}:`
+`{self.bot.user.display_name}: ?`
 """
         )
         #embed.add_field(name=f"`{self.bot.user.display_name}:`", value=f"```Nasıl yardımcı olabilirim?```")
@@ -27,8 +28,12 @@ Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını san
             super().__init__(*items, timeout=timeout)
 
         @discord.ui.button(label="Programlamaya nasıl başlarım yardımcı olabilir misin?", style=discord.ButtonStyle.secondary)
-        async def bc1(self, button, interaction: discord.Interaction):
+        async def _1(self, button, interaction: discord.Interaction):
             await Baslayacagim.baslayacagim(self, interaction)
+
+        @discord.ui.button(label="Türk Programcılar destesindeki sihirli kart numaraları hakkında bilgin var mı?", style=discord.ButtonStyle.secondary)
+        async def _2(self, button, interaction: discord.Interaction):
+            await Kartci.deste(self, interaction)
 
 def main():
     ArayuzNazgul("TPBOT_TOKEN_NAZGUL_1", ArayuzNazgul.__name__.lower())

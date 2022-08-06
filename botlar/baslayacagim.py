@@ -1,6 +1,6 @@
 
 import discord
-from alayina_gider import Cogcu
+from alayina_gider import Cogcu, cevap
 from discord.ext.commands import *
 from baslayacagim_yazi import Yazi
 from baslayacagim_diller import Diller
@@ -276,11 +276,8 @@ class Baslayacagim(Cogcu):
 ################################################################################
 
     @slash_command(description="programlamaya başlamak istiyor ve nereden başlayacağınızı bilmiyorsanız hemen bu komutu çalıştırın!")
-    async def baslayacagim(self, ctx):
-        if type(ctx) is discord.interactions.Interaction:
-            await ctx.response.send_message("**Programlamayı neden öğrenmek istiyorsunuz?**", view=__class__.AkisBaslangic(bot=self.bot), ephemeral=True)
-            return
-        await ctx.respond("**Programlamayı neden öğrenmek istiyorsunuz?**", view=__class__.AkisBaslangic(bot=self.bot), ephemeral=True)
+    async def baslayacagim(self, ctx: discord.ApplicationContext):
+        await cevap(ctx)("**Programlamayı neden öğrenmek istiyorsunuz?**", view=__class__.AkisBaslangic(bot=self.bot), ephemeral=True)
 
 
 class Yol():
