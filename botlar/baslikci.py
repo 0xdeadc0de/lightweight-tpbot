@@ -1,3 +1,4 @@
+import discord
 from discord import Message
 from alayina_gider import Cogcu, yonetici_mi
 from discord.ext.commands import *
@@ -5,6 +6,8 @@ from discord.ext.commands import *
 class Baslikci(Cogcu):
     @Cog.listener("on_message")
     async def yarat(self, ctx: Message):
+        if type(ctx.channel) is not discord.TextChannel:
+            return
         if 120 != ctx.channel.slowmode_delay:
             return
         await ctx.create_thread(name="Yorumlar 👉")
