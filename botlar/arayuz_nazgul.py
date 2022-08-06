@@ -12,9 +12,7 @@ class ArayuzNazgul(Arayuzcu):
         return([embed_sohbet(self.bot.user, 
             dis_ses=f"""_Yol üzerinde yürürken birden etrafını karanlıklar sardı ve yolunu süliyeti belirsiz bir atlı sürücü kesiverdi.
 Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını sana doğru çevirdi ve gülümsedi_
-`{self.bot.user.display_name}: ?`""", 
-            resim="https://media2.giphy.com/media/W62wk6w0VI55Ijcnva/giphy.gif?cid=790b7611bff8340e5b25e79b3d4bb4cf177efb5725b6ba9d&rid=giphy.gif&ct=g"
-        )])
+`{self.bot.user.display_name}: ?`""", )])
 
     class Arayuz(discord.ui.View):
         def __init__(self, *items, timeout = 180, bot = None):
