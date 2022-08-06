@@ -1,7 +1,7 @@
 from kartci_yazi import kartlar
 from kartci_nitelik import CardPlayKind, CardRarity, CardTitle
 import discord
-from alayina_gider import Cogcu, idler
+from alayina_gider import Cogcu, idler, cevap
 from discord.commands import *
 from discord.ext.commands import *
 
@@ -51,7 +51,7 @@ class Kartci(Cogcu):
     
     @slash_command(guild_ids=[idler.sunucu], description="TP destesine gözat.")
     async def deste(self, ctx):
-        await ctx.respond("```css\n"+"\n".join([str(k+1)+". "+v.baslik for k, v in enumerate(kartlar)])+"```", ephemeral=True)
+        await cevap(ctx)("```css\n"+"\n".join([str(k+1)+". "+v.baslik for k, v in enumerate(kartlar)])+"```", ephemeral=True)
     
 
     @Cog.listener()
