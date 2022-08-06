@@ -277,6 +277,9 @@ class Baslayacagim(Cogcu):
 
     @slash_command(description="programlamaya başlamak istiyor ve nereden başlayacağınızı bilmiyorsanız hemen bu komutu çalıştırın!")
     async def baslayacagim(self, ctx):
+        if type(ctx) is discord.interactions.Interaction:
+            await ctx.response.send_message("**Programlamayı neden öğrenmek istiyorsunuz?**", view=__class__.AkisBaslangic(bot=self.bot), ephemeral=True)
+            return
         await ctx.respond("**Programlamayı neden öğrenmek istiyorsunuz?**", view=__class__.AkisBaslangic(bot=self.bot), ephemeral=True)
 
 
@@ -290,6 +293,6 @@ class Yol():
 
 
 def main():
-Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())
+    Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())
 if __name__ == "__main__":
     main()

@@ -131,6 +131,11 @@ def ortamaBirBak(isim):
         exit(-1)
     return deger
 
+def HEROKU():
+    return os.environ.get("TPBOT_DEBUG") is None
+def DEBUG():
+    return not HEROKU()
+
 class TemelKomutlar(Cog):
     def __init__(self, token_ismi, bot):
         self.token_ismi = token_ismi
@@ -164,7 +169,7 @@ class Tpbot(Bot):
         self.cogs.append(TemelKomutlar(token_ismi, self))
         self.token_ismi = token_ismi
         self.gunluk("merhaba dünya!")
-        super().__init__(command_prefix="!" if os.environ.get("TPBOT_DEBUG") is None else "$", intents=discord.Intents.all())
+        super().__init__(command_prefix="!" if HEROKU() else "$", intents=discord.Intents.all())
 
     async def baslat(self, cogcu=None):
         if cogcu:
@@ -212,3 +217,22 @@ class Cogcu(Cog):
             else:
                 cogbot.gunluk("cogcu zaten yuklu =>", self.cog_ismi)
                 return
+
+import datetime
+class Arayuzcu(Cogcu):
+    @Cog.listener()
+    async def on_ready(self):
+        guild = self.bot.get_guild(idler.sunucu)
+        if guild is None:
+            return
+        
+        id=self.kanal_id if HEROKU() else Kanal.TpbotTest1.id
+        channel = await guild.fetch_channel(id)
+        if channel is None:
+            return
+
+        async for msg in channel.history(limit=10):
+            if msg is not None and msg.author.id == self.bot.user.id:
+                await msg.delete()
+
+        await channel.send(content=self.baslik+(f" `{datetime.datetime.now()}`" if DEBUG() else ""), embeds=self.embedler(), view=self.Arayuz(bot=self.bot))
