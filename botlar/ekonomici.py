@@ -148,14 +148,6 @@ class Ekonomici(Cogcu):
             ozellikler={"Ricardo (RCC)": cuzdan.pending_ricardo, "Risitas (RSC)": cuzdan.pending_risitas, "İbo (IBO)": cuzdan.pending_ibo},
             resim="https://c.tenor.com/rD9QG-wudPoAAAAC/cat-cashier.gif"
         ))
-        
-
-    @Cog.listener()
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, CommandOnCooldown):
-            await ctx.send(error)
-        else:
-            raise error
 
 def main():
     Ekonomici("TPBOT_TOKEN_BAKKAL", Ekonomici.__name__.lower())

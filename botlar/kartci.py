@@ -70,14 +70,6 @@ class Kartci(Cogcu):
     @slash_command(guild_ids=[idler.sunucu], description="TP destesine gözat.")
     async def deste(self, ctx):
         await cevap(ctx)("```css\n"+"\n".join([str(k+1)+". "+v.baslik for k, v in enumerate(kartlar)])+"```", ephemeral=True)
-    
-
-    @Cog.listener()
-    async def on_application_command_error(self, ctx, error):
-        if isinstance(error, CommandOnCooldown):
-            await ctx.respond(error, ephemeral=True)
-        else:
-            raise error
 
 def main():
     Kartci("TPBOT_TOKEN_NAZGUL_2", Kartci.__name__.lower())

@@ -209,11 +209,6 @@ class TemelKomutlar(Cog):
 
             await thumbs(ctx, result is not None)
 
-    @Cog.listener()
-    async def command_not_found(self, ctx, error):
-        if isinstance(error, CommandNotFound):
-            return
-
 class Tpbot(Bot):
     cogs = []
     def __init__(self, token_ismi) -> None:
@@ -253,6 +248,18 @@ class Tpbot(Bot):
             "Şimdi yeni birşeyler öğrenme zamanı!"
         ])
         await self.change_presence(activity=discord.Game(name=secim))
+        
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, CommandOnCooldown):
+            await ctx.send(error)
+        else:
+            raise error
+            
+    async def on_application_command_error(self, ctx, error):
+        if isinstance(error, CommandOnCooldown):
+            await ctx.respond(error, ephemeral=True)
+        else:
+            raise error
 
         
 cogbotlar : dict[str, Tpbot] = {}
