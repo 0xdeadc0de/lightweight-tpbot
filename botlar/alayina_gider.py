@@ -127,6 +127,9 @@ class Yonetici:
 class Rol:
     varMi = TDK.varMiYapici(lambda ctx: ctx.author.roles)
 class Rol:
+    class TpUyesi:
+        id = 900647464342790204
+        varMi = Rol.varMi(id)
     class Asistan:
         id = 826741535839748096
         varMi = Rol.varMi(id)

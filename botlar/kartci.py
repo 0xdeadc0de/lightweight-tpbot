@@ -1,7 +1,7 @@
 from kartci_yazi import kartlar
 from kartci_nitelik import CardPlayKind, CardRarity, CardTitle
 import discord
-from alayina_gider import Cogcu, idler, cevap
+from alayina_gider import Cogcu, idler, cevap, Rol
 from discord.commands import *
 from discord.ext.commands import *
 
@@ -53,7 +53,10 @@ class Kartci(Cogcu):
         if no <= 0 or no > len(kartlar):
             await ctx.respond("Geçersiz kart no", ephemeral=True)
         else:
-            await ctx.respond("`"+ctx.author.display_name + " bir kart gösterdi.`", embeds=[cardGosterGifli(no)],ephemeral=False)
+            if ctx.channel.permissions_for(ctx.author).view_channel and ctx.channel.permissions_for(ctx.author).send_messages:
+                await ctx.respond("`"+ctx.author.display_name + " bir kart gösterdi.`", embeds=[cardGosterGifli(no)],ephemeral=False)
+            else:
+                await ctx.respond("Bu kanala kart gönderemezsiniz", ephemeral=True)
 
     @slash_command(guild_ids=[idler.sunucu], description="TP destesinden bir karta göz at.")
     @cooldown(1, 15, BucketType.user)
