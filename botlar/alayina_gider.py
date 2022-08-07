@@ -267,6 +267,7 @@ class Arayuzcu(Cogcu):
     last: datetime.datetime = None
     @Cog.listener()
     async def on_ready(self):
+        gunluk(self.token_ismi, "on_ready kanal gonderime giris yapti")
         last = self.last
         if last is None:
             last = datetime.datetime.utcnow()
