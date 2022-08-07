@@ -85,20 +85,15 @@ class Ekonomici(Cogcu):
         )
 
     async def _bakiye(self, ctx: discord.ApplicationContext, id=None):
-        kullanici = self.mango.uyeyi_bul(id)
-        ricardo = 0
-        risitas = 0
-        if kullanici is not None:
-            ricardo = kullanici.get("ricardo_coin") or 0
-            risitas = kullanici.get("risitas_coin") or 0
+        cuzdan = self.mango.uye(id).cuzdan()
         
         uye = sunucu_uyesi(ctx, int(id))
         if uye is None:
             return
 
         await ctx.send(embed=embed_sohbet(self.bot.user, 
-            f"`{uye.display_name}`k adlı üyenin {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'i bulunmaktadır.",
-            ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
+            f"`{uye.display_name}`k adlı üyenin {cuzdan.ricardo} Ricardo (RCC) ve {cuzdan.risitas} Risitas (RSC) coin'i bulunmaktadır.",
+            ozellikler={"Ricardo (RCC)": cuzdan.ricardo, "Risitas (RSC)": cuzdan.risitas},
             resim="https://i.imgur.com/T9rS8qU.png"
         ))
 
@@ -128,22 +123,17 @@ class Ekonomici(Cogcu):
     @cooldown(1, 60, BucketType.user)
     async def paraciklar(self, ctx: discord.ApplicationContext):
         """Bekleyen Ricardo (RCC) ve Risitas (RSC) coin'leri toplar"""
-        kullanici = self.mango.uyeyi_bul(ctx.author.id)
-        ricardo = 0
-        risitas = 0
-        if kullanici is not None:
-            ricardo = kullanici.get("ricardo_coin_pending") or 0
-            risitas = kullanici.get("risitas_coin_pending") or 0
-        if kullanici is None or ricardo == risitas == 0:
+        cuzdan = self.mango.uye(ctx.author.id).cuzdan()
+        if cuzdan.pending_ricardo ==  cuzdan.pending_risitas == 0:
             await ctx.send("Bekleyen coin'iniz bulunmamaktadır.")
             return
         
         self.mango.uyeyi_guncelle(ctx.author.id, {
             "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0}, 
-            "$inc": {"ricardo_coin": ricardo, "risitas_coin": risitas}})
+            "$inc": {"ricardo_coin": cuzdan.pending_ricardo, "risitas_coin": cuzdan.pending_risitas}})
         await ctx.send(embed=embed_sohbet(self.bot.user,
-            f"`{ctx.author.display_name}` bekleyen {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'lerini topladı.",
-            ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
+            f"`{ctx.author.display_name}` bekleyen {cuzdan.pending_ricardo} Ricardo (RCC) ve {cuzdan.pending_risitas} Risitas (RSC) coin'lerini topladı.",
+            ozellikler={"Ricardo (RCC)": cuzdan.pending_ricardo, "Risitas (RSC)": cuzdan.pending_risitas},
             resim="https://c.tenor.com/rD9QG-wudPoAAAAC/cat-cashier.gif"
         ))
         
