@@ -5,10 +5,12 @@ import time
 import os
 import asyncio
 
-def embed_sohbet(sahis: discord.User, dis_ses="", konusma=None, resim=None):
+def embed_sohbet(sahis: discord.User, dis_ses="", konusma=None, resim=None, ozellikler={}):
     embed=discord.Embed(description=dis_ses)
     if konusma is not None:
         embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{konusma}```", inline=False)
+    for nitel, nicel in ozellikler.items():
+        embed.add_field(name=f"`{nitel}:`", value=f"{nicel}", inline=True)
     embed.set_thumbnail(url=sahis.avatar.url)
     #embed.set_author(name=sahis.display_name, icon_url=sahis.display_avatar.url)
     if resim is not None:
@@ -192,6 +194,10 @@ class TemelKomutlar(Cog):
 
             await thumbs(ctx, result is not None)
 
+    @Cog.listener()
+    async def command_not_found(self, ctx, error):
+        if isinstance(error, CommandNotFound):
+            return
 
 class Tpbot(Bot):
     cogs = []

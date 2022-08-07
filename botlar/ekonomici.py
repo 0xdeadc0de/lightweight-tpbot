@@ -2,7 +2,7 @@
 from collections import defaultdict
 import discord
 import pymongo
-from alayina_gider import Cogcu, TurkProgramcilar, Kanal, Rol, sunucu_uyesi, idler
+from alayina_gider import Cogcu, TurkProgramcilar, Kanal, embed_sohbet, sunucu_uyesi, idler, Rol
 from discord.ext.commands import *
 from discord.ext.tasks import *
 from mangocu import Mangocu
@@ -96,7 +96,11 @@ class Ekonomici(Cogcu):
         if uye is None:
             return
 
-        await ctx.send(f"`{uye.display_name} {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'i bulunmaktadır.`")
+        await ctx.send(embed=embed_sohbet(self.bot.user, 
+            f"{uye.display_name} adlı üyenin {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'i bulunmaktadır.",
+            ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
+            resim="https://i.imgur.com/T9rS8qU.png"
+        ))
 
 
     @command()
@@ -137,7 +141,11 @@ class Ekonomici(Cogcu):
         self.mango.uyeyi_guncelle(ctx.author.id, {
             "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0}, 
             "$inc": {"ricardo_coin": ricardo, "risitas_coin": risitas}})
-        await ctx.send(f"`{ctx.author.display_name} bekleyen {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'lerini topladı.`")
+        await ctx.send(embed=embed_sohbet(self.bot.user,
+            f"`{ctx.author.display_name} bekleyen {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'lerini topladı.`",
+            ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
+            resim="https://c.tenor.com/rD9QG-wudPoAAAAC/cat-cashier.gif"
+        ))
         
 
     @Cog.listener()
