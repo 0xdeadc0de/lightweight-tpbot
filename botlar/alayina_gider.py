@@ -216,7 +216,7 @@ class Tpbot(Bot):
         self.cogs.append(TemelKomutlar(token_ismi, self))
         self.token_ismi = token_ismi
         self.gunluk("merhaba dünya!")
-        super().__init__(command_prefix="!" if HEROKU() else "$", intents=discord.Intents.all())
+        super().__init__(command_prefix="!" if HEROKU() else "$", intents=discord.Intents.all(), help_command=DefaultHelpCommand())
 
     async def baslat(self, cogcu=None):
         token = ortamaBirBak(self.token_ismi, kapat=False)
@@ -253,9 +253,10 @@ class Tpbot(Bot):
         await self.change_presence(activity=discord.Game(name=secim))
         
     async def on_command_error(self, ctx, error):
-        if isinstance(error, CommandOnCooldown) or\
-           isinstance(error, CommandNotFound):
+        if isinstance(error, CommandOnCooldown):
             await ctx.send(error)
+        elif isinstance(error, CommandNotFound):
+            return
         else:
             raise error
             
