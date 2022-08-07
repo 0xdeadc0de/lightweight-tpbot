@@ -73,11 +73,6 @@ class Ekonomici(Cogcu):
         if msg.channel.category_id == idler.paylasimlar:
             self.risitas_coin_ver(msg.author.id, 1)
 
-        # bugun ne yaptim icin 500 risitas
-        if msg.channel.id == Kanal.BugunNeYaptim.id:
-            self.risitas_coin_ver(msg.author.id, 500)
-            return
-
     @command()
     async def kgt(self, ctx: Context):
         if type(ctx.channel) is not discord.Thread or ctx.channel.parent_id != Kanal.BugunNeYaptim.id:

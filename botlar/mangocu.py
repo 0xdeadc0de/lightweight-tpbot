@@ -85,7 +85,8 @@ class Mangocu:
             if simdi < sure + kgt:
                 return False
             self.ez("kgt", simdi)
-            self.ver("karanlik_guc_", 1)
+            self.ver("karanlik_guc_")
+            self.ver("ricardo_coin_pending", 500)
             return True
 
         def cuzdan(self):
