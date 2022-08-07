@@ -5,9 +5,9 @@ import datetime
 class Mangocu:
 
     def __init__(self) -> None:
-        if self.sik is not None:
+        if Mangocu.sik is not None:
             raise Exception("hassikleton")
-        self.sik = self
+        Mangocu.sik = self
         self.cluster = pymongo.MongoClient(ortamaBirBak("TPBOT_MONGO"))
         self.db      = self.cluster["mongodb_tp"]
         self.user    = self.db["users"]
