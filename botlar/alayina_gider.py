@@ -255,7 +255,8 @@ class Tpbot(Bot):
     async def on_command_error(self, ctx, error):
         if isinstance(error, CommandOnCooldown):
             await ctx.send(error)
-        elif isinstance(error, CommandNotFound):
+        elif isinstance(error, CommandNotFound) or\
+             isinstance(error, CheckFailure):
             return
         else:
             raise error
