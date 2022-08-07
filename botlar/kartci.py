@@ -39,15 +39,30 @@ def cardGosterEmbed(no):
     embed.set_thumbnail(url=kart.link)
     return embed
 
+def cardGosterGifli(no):
+    embed=cardGosterEmbed(no)
+    embed.set_image(url=embed.thumbnail.url)
+    embed.remove_thumbnail()
+    return embed
+
 class Kartci(Cogcu):
-    @slash_command(guild_ids=[idler.sunucu], description="TP destesinden bir kart oynar.")
-    @cooldown(1, 60, BucketType.user)
-    @option("kart no", description="hangi kart oynancak?")
+    @slash_command(guild_ids=[idler.sunucu], description="TP destesinden bir kart gösterir.")
+    @cooldown(1, 15, BucketType.user)
+    @option("kart no", description="hangi kart gösterilecek?")
     async def kart(self, ctx: discord.ApplicationContext, no: int):
         if no <= 0 or no > len(kartlar):
             await ctx.respond("Geçersiz kart no", ephemeral=True)
         else:
-            await ctx.respond("`"+ctx.author.display_name + " bir kart oynadı.`", embeds=[cardGosterEmbed(no)],ephemeral=False)
+            await ctx.respond("`"+ctx.author.display_name + " bir kart gösterdi.`", embeds=[cardGosterGifli(no)],ephemeral=False)
+
+    @slash_command(guild_ids=[idler.sunucu], description="TP destesinden bir karta göz at.")
+    @cooldown(1, 15, BucketType.user)
+    @option("kart no", description="hangi kart gösterilecek?")
+    async def gozat(self, ctx: discord.ApplicationContext, no: int):
+        if no <= 0 or no > len(kartlar):
+            await ctx.respond("Geçersiz kart no", ephemeral=True)
+        else:
+            await ctx.respond(embeds=[cardGosterEmbed(no)],ephemeral=True)
     
     @slash_command(guild_ids=[idler.sunucu], description="TP destesine gözat.")
     async def deste(self, ctx):
