@@ -77,6 +77,6 @@ class Kartci(Cogcu):
             raise error
 
 def main():
-    Kartci("TPBOT_TOKEN_NAZGUL_1", Kartci.__name__.lower())
+    Kartci("TPBOT_TOKEN_NAZGUL_2", Kartci.__name__.lower())
 if __name__ == "__main__":
     main()

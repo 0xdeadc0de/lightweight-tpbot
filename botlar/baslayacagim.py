@@ -290,6 +290,6 @@ class Yol():
 
 
 def main():
-    Baslayacagim("TPBOT_TOKEN_NAZGUL_1", Baslayacagim.__name__.lower())
+    Baslayacagim("TPBOT_TOKEN_NAZGUL_2", Baslayacagim.__name__.lower())
 if __name__ == "__main__":
     main()

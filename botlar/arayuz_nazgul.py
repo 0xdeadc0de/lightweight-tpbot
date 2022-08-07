@@ -39,6 +39,6 @@ Kart numaraları hakkında bilgi almak için ` /deste ` komutunu kullanabilirsin
             await Kartci.deste(self, interaction)
 
 def main():
-    ArayuzNazgul("TPBOT_TOKEN_NAZGUL_1", ArayuzNazgul.__name__.lower())
+    ArayuzNazgul("TPBOT_TOKEN_NAZGUL_2", ArayuzNazgul.__name__.lower())
 if __name__ == "__main__":
     main()
