@@ -263,9 +263,20 @@ class Cogcu(Cog):
                 return
 
 import datetime
+last: datetime.datetime = None
 class Arayuzcu(Cogcu):
     @Cog.listener()
     async def on_ready(self):
+        global last
+        if last is None:
+            last = datetime.datetime.utcnow()
+        else:
+            delta = (datetime.datetime.utcnow() - last)
+            if delta.min < 1:
+                return
+            else:
+                last += delta 
+                
         guild = self.bot.get_guild(idler.sunucu)
         if guild is None:
             return
