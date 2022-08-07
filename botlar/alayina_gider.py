@@ -253,7 +253,8 @@ class Tpbot(Bot):
         await self.change_presence(activity=discord.Game(name=secim))
         
     async def on_command_error(self, ctx, error):
-        if isinstance(error, CommandOnCooldown):
+        if isinstance(error, CommandOnCooldown) or\
+           isinstance(error, CommandNotFound):
             await ctx.send(error)
         else:
             raise error
