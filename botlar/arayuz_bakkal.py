@@ -26,18 +26,31 @@ Elindeki bir keseden hışırtılı bir şekilde teker teker çıkarttığı mad
 
         @discord.ui.button(label="Bu madeni paralar hakkında bilgi verebilir misin?", style=discord.ButtonStyle.secondary, row=0)
         async def _1(self, button, interaction: discord.Interaction):
-            await interaction.response.send_message(
-                ephemeral=True,
-                embed=embed_sohbet(self.bot.user, dis_ses=
-f"""`{self.bot.user.display_name}:`
-Türk Programcılar sunucusunda iki çeşit madeni para vardır. Birincisi `Risitas Coin (RSC)`. İkincisi ise `Ricardo Coin (RCC)`
+            embed=embed_sohbet(self.bot.user, konusma=
+f"""Türk Programcılar diyarında üç çeşit madeni para vardır. 
 
-Sunucu içerisindeki her bir üye yeteri kadar uzun mesaj gönderdiğinde `1 RCC dinarı` kazanırlar.
+Birincisi `Risitas Coin (RSC)`.
+İkincisi ise `Ricardo Coin (RCC)`. 
+Üçüncüsü ise `İbo Coin (İBO)`dir.
 
-Ayrıca başlık içerisinde ise gönderdikleri mesaj spam olmadığı sürece belirli bir şans ile ekstra `1 RCC dinarı` daha kazanırlar. \
-Dolayısı ile her bir başlık mesajı `2 RCC dinarı` kazanma şansı vardır.
+Bu topraklarda belirli aktiviteler sonucu bu madeni paralardan kazanma şansın vardır.""")
+            class Devam(discord.ui.View):
+                def __init__(self, *items, timeout = None, bot = None):
+                    self.bot = bot
+                    super().__init__(*items, timeout=timeout)
+                @discord.ui.button(label="Ricardo Coin (RCC) hakkında bilgi verebilir misin?", style=discord.ButtonStyle.secondary, row=0)
+                async def _1(self, button, interaction: discord.Interaction):
+                    embed=embed_sohbet(self.bot.user, konusma=
+f"""Sunucu içerisindeki her bir üye yeteri kadar uzun mesaj gönderdiğinde `1 RCC dinarı` kazanırlar.
 
-<#{Kanal.Bumperado.id}> diyarında bump yapılanlar Ekselans Risitas tarafından `100 RSC` ile şereflendirilirler. \
+Ayrıca başlık içerisinde gönderdikleri mesaj spam olmadığı sürece belirli bir şans ile ekstra `1 RCC dinarı` daha kazanırlar. \
+Dolayısı ile her bir başlık mesajı `2 RCC dinarı` kazanma şansı vardır.""")
+                    await interaction.response.send_message(ephemeral=True, embed=embed)
+
+                @discord.ui.button(label="Risitas Coin (RSC) hakkında bilgi verebilir misin?", style=discord.ButtonStyle.secondary, row=1)
+                async def _2(self, button, interaction: discord.Interaction):
+                    embed=embed_sohbet(self.bot.user, konusma=
+f"""<#{Kanal.Bumperado.id}> diyarında bump yapılanlar Ekselans Risitas tarafından `100 RSC` ile şereflendirilirler. \
 Unutma her iki saatte bir sadece bir kişi bu ödüle ulaşabilir. \
 O yüzden bu ödülü kazanbilmek için sunucuyu çok iyi takip etmen gerekir.
 
@@ -49,7 +62,27 @@ etmeyi kesinlikle unutma.
 
 Şimdilik sana öğreteceklerim bu kadar. Ha birde unutmadan... Moderatör gözlerin belirli durumlarda Risitas Coin ödülü verme hakları vardır. \
 Bunlardan ilk ve en önemlisi <#{Kanal.GununSorusu.id}> diyarında günlük leetcode sorularıyla savaşmak. İkincisi ise \
-sunucu içerisinde örnek bir üye olmaktır."""))
+sunucu içerisinde örnek bir üye olmaktır.""")
+                    await interaction.response.send_message(ephemeral=True, embed=embed)
+
+                @discord.ui.button(label="İbo Coin (İBO) hakkında bilgi verebilir misin?", style=discord.ButtonStyle.secondary, row=2)
+                async def _3(self, button, interaction: discord.Interaction):
+                    embed=embed_sohbet(self.bot.user, konusma=
+f"""Türk Programcılar krallığında bu diyara özel tanımlanmış sunucu emojilerinin kullanımı yaygındır.
+
+<#{Kanal.EmojiKatalogu.id}> sokağına gidersen burada tanımlanan özel sunucu emojilerini bulabilirsin. \
+Bu kategoride bulunan İbo emojilerinin kullanımı belirli bir şans ile `1 İbo Coin` kazandırır. \
+Arkadaşlarınla sohbet ederken kendini ifade etmek için standart emojiler yerine buradaki emojileri kullanmalısın \
+ki bu madeni sık sık kazanasın.
+
+Ayrıca... Bir söylentiye göre de bu diyarda Efsanevi İbo adında esrarengiz bir varlık gördüğü kişilere çok yüklü miktarda \
+İbo Coin armağan edermiş. Şu güne kadar buna tanıklık ettiğini söyleyen bir kaç kişi dükkanımı ziyaret etti fakat şahsen ben \
+anlatılan hikayelerin masal olduğuna inanıyorum. Kim bilir belki bir gün sen karşılaşırsın ve bana bu karakter hakkında daha fazla \
+bilgi verirsin!""")
+                    await interaction.response.send_message(ephemeral=True, embed=embed)
+            # devam sonu
+
+            await interaction.response.send_message(ephemeral=True, embed=embed, view=Devam(bot=self.bot))
 
         @discord.ui.button(label="Senin saydıklarına benzer bir kaç madeni param var.", style=discord.ButtonStyle.secondary, row=0)
         async def _2(self, button, interaction: discord.Interaction):
