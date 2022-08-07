@@ -270,17 +270,16 @@ class Arayuzcu(Cogcu):
     last: datetime.datetime = None
     @Cog.listener()
     async def on_ready(self):
-        gunluk(self.token_ismi, "on_ready kanal gonderime giris yapti")
         last = self.last
         if last is None:
-            last = datetime.datetime.utcnow()
+            self.last = datetime.datetime.utcnow()
         else:
             delta = (datetime.datetime.utcnow() - last)
-            if delta.seconds < 60:
+            if delta.seconds < 180:
                 return
             else:
-                last += delta 
-
+                self.last += delta
+        gunluk(self.token_ismi, "on_ready kanal gonderime giris yapti")
         guild = self.bot.get_guild(idler.sunucu)
         if guild is None:
             return
@@ -290,7 +289,7 @@ class Arayuzcu(Cogcu):
         if channel is None:
             return
 
-        async for msg in channel.history(limit=2):
+        async for msg in channel.history(limit=4):
             if msg is not None and msg.author.id == self.bot.user.id:
                 try:
                     await msg.delete()
