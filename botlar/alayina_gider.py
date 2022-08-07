@@ -290,7 +290,7 @@ class Arayuzcu(Cogcu):
         if channel is None:
             return
 
-        async for msg in channel.history(limit=10):
+        async for msg in channel.history(limit=2):
             if msg is not None and msg.author.id == self.bot.user.id:
                 try:
                     await msg.delete()
