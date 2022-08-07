@@ -5,10 +5,10 @@ import time
 import os
 import asyncio
 
-def embed_sohbet(sahis: discord.User, dis_ses="", konusma=None, resim=None, ozellikler={}):
+def embed_sohbet(sahis: discord.User, dis_ses="", balon=None, resim=None, ozellikler={}):
     embed=discord.Embed(description=dis_ses)
-    if konusma is not None:
-        embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{konusma}```", inline=False)
+    if balon is not None:
+        embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{balon}```", inline=False)
     for nitel, nicel in ozellikler.items():
         embed.add_field(name=f"`{nitel}:`", value=f"{nicel}", inline=True)
     embed.set_thumbnail(url=sahis.avatar.url)

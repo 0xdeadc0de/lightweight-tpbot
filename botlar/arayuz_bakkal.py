@@ -15,7 +15,7 @@ class ArayuzBakkal(Arayuzcu):
             dis_ses=f"""_Türk Programcılar diyarında dolaşırken dar sokaklar arasından bir küçük dükkanda kendi halinde köşesine \
 çekilmiş tıfıl bir adam ile karşılaştın. 
 
-Elindeki bir keseden hışırtılı bir şekilde teker teker çıkarttığı madeni paraları sayarken birden göz göze geliverdin_""",konusma=
+Elindeki bir keseden hışırtılı bir şekilde teker teker çıkarttığı madeni paraları sayarken birden göz göze geliverdin_""",balon=
 """Zamanımı harcama. Vakit nakittir. Ne istiyorsun söyle."""
         )])
 
