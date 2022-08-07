@@ -166,11 +166,14 @@ async def wave(bot, ctx):
 def gunluk(token_ismi, *mesajlar):
     print(time.strftime("%Y/%m/%d %H:%M (GMT%z)"), f"[{token_ismi}]:", *mesajlar)
 
-def ortamaBirBak(isim):
+def ortamaBirBak(isim, kapat=True):
     deger = os.environ.get(isim)
     if deger is None:
         gunluk(isim, f"{isim} degeri tanimli degil")
-        exit(-1)
+        if kapat: 
+            exit(-1)
+        else:
+            return None
     return deger
 
 def HEROKU():
@@ -218,12 +221,15 @@ class Tpbot(Bot):
         super().__init__(command_prefix="!" if HEROKU() else "$", intents=discord.Intents.all())
 
     async def baslat(self, cogcu=None):
+        token = ortamaBirBak(self.token_ismi, kapat=False)
+        if token is None:
+            self.gunluk("token bulunamadi, bot baslatilma atlanıyor...")
+            return
         if cogcu:
             self.cogs.append(cogcu)
         for cog in self.cogs:
             if self.get_cog(cog.qualified_name) is None:
                 self.add_cog(cog)
-        token = ortamaBirBak(self.token_ismi)
         await self.start(token)
 
     def gunluk(self, *mesajlar):
