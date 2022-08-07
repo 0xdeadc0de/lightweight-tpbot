@@ -48,19 +48,19 @@ class Bakkal(Cogcu):
                         ozellikler={kartlar[no-1].baslik: adet for no, adet in paket.items()}))
                     
 
-            @discord.ui.button(label="10'lu kart satın al", style=discord.ButtonStyle.gray, row=0)
+            @discord.ui.button(label="10'lu kart satın al (100 RSC)", style=discord.ButtonStyle.gray, row=0)
             async def _1(self, button, interaction: discord.Interaction):
 
                 await self.kart_al(interaction, carpan=1)
 
 
-            @discord.ui.button(label="30'lu kart satın al", style=discord.ButtonStyle.gray, row=0)
+            @discord.ui.button(label="30'lu kart satın al (300 RSC)", style=discord.ButtonStyle.gray, row=0)
             async def _2(self, button, interaction: discord.Interaction):
                 
                 await self.kart_al(interaction, carpan=3)
 
 
-            @discord.ui.button(label="50'li kart satın al", style=discord.ButtonStyle.gray, row=0)
+            @discord.ui.button(label="50'li kart satın al (500 RSC)", style=discord.ButtonStyle.gray, row=0)
             async def _3(self, button, interaction: discord.Interaction):
 
                 await self.kart_al(interaction, carpan=5)
