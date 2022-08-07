@@ -92,8 +92,8 @@ class Ekonomici(Cogcu):
             return
 
         await ctx.send(embed=embed_sohbet(self.bot.user, 
-            f"`{uye.display_name}`k adlı üyenin {cuzdan.ricardo} Ricardo (RCC) ve {cuzdan.risitas} Risitas (RSC) coin'i bulunmaktadır.",
-            ozellikler={"Ricardo (RCC)": cuzdan.ricardo, "Risitas (RSC)": cuzdan.risitas},
+            f"`{uye.display_name}`k adlı üyenin hesap dökümü aşağıda belirtilmiştir.",
+            ozellikler={"Ricardo (RCC)": cuzdan.ricardo, "Risitas (RSC)": cuzdan.risitas, "İbo (IBO)": cuzdan.ibo},
             resim="https://i.imgur.com/T9rS8qU.png"
         ))
 
@@ -124,16 +124,16 @@ class Ekonomici(Cogcu):
     async def paraciklar(self, ctx: discord.ApplicationContext):
         """Bekleyen Ricardo (RCC) ve Risitas (RSC) coin'leri toplar"""
         cuzdan = self.mango.uye(ctx.author.id).cuzdan()
-        if cuzdan.pending_ricardo ==  cuzdan.pending_risitas == 0:
+        if cuzdan.pending_ricardo ==  cuzdan.pending_risitas == cuzdan.pending_ibo == 0:
             await ctx.send("Bekleyen coin'iniz bulunmamaktadır.")
             return
         
         self.mango.uyeyi_guncelle(ctx.author.id, {
-            "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0}, 
-            "$inc": {"ricardo_coin": cuzdan.pending_ricardo, "risitas_coin": cuzdan.pending_risitas}})
+            "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0, "ibo_coin_pending": 0}, 
+            "$inc": {"ricardo_coin": cuzdan.pending_ricardo, "risitas_coin": cuzdan.pending_risitas, "ibo_coin": cuzdan.pending_ibo}})
         await ctx.send(embed=embed_sohbet(self.bot.user,
-            f"`{ctx.author.display_name}` bekleyen {cuzdan.pending_ricardo} Ricardo (RCC) ve {cuzdan.pending_risitas} Risitas (RSC) coin'lerini topladı.",
-            ozellikler={"Ricardo (RCC)": cuzdan.pending_ricardo, "Risitas (RSC)": cuzdan.pending_risitas},
+            f"`{ctx.author.display_name}` bekleyen coin'lerini topladı. Kazanımlar:",
+            ozellikler={"Ricardo (RCC)": cuzdan.pending_ricardo, "Risitas (RSC)": cuzdan.pending_risitas, "İbo (IBO)": cuzdan.pending_ibo},
             resim="https://c.tenor.com/rD9QG-wudPoAAAAC/cat-cashier.gif"
         ))
         

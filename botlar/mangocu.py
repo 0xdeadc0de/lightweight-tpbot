@@ -19,11 +19,13 @@ class Mangocu:
 
 
     class Cuzdan:
-        def __init__(self, rcc: int, rsc: int, rccp: int, rscp: int) -> None:
+        def __init__(self, rcc: int, rsc: int, ibo: int, rccp: int, rscp: int, ibop) -> None:
             self.ricardo = rcc
             self.risitas = rsc
+            self.ibo = ibo
             self.pending_ricardo = rccp
             self.pending_risitas = rscp
+            self.pending_ibo = ibop
     class Uye:
         def __init__(self, id: int, mangocu) -> None:
             self.id = str(id)
@@ -41,9 +43,11 @@ class Mangocu:
             if kullanici is not None:
                 rcc = kullanici.get("ricardo_coin") or 0
                 rsc = kullanici.get("risitas_coin") or 0
+                ibo = kullanici.get("ibo_coin") or 0
                 rccp = kullanici.get("ricardo_coin_pending") or 0
                 rscp = kullanici.get("risitas_coin_pending") or 0
-            return Mangocu.Cuzdan(rcc, rsc, rccp, rscp)
+                ibop = kullanici.get("ibo_pending") or 0
+            return Mangocu.Cuzdan(rcc, rsc, ibo, rccp, rscp, ibop)
 
     def uye(self, id: int):
         return self.Uye(id, self)
