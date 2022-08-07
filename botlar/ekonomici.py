@@ -57,6 +57,7 @@ class Ekonomici(Cogcu):
         if msg.thread is not None and msg.thread.is_private:
             return
 
+        # her mesaj icin RCC ve baslik icin ekstra sans
         if sans(min(1, len(msg.content)**2*1e-4)):
             ricardo_coin = 1
             if msg.thread and sans(.5):
@@ -64,17 +65,27 @@ class Ekonomici(Cogcu):
 
             self.mesajcilar[msg.author.id]["ricardo_coin_pending"] += ricardo_coin
 
+        # her ibo icin ibo
         if sans(.5) and re.match(".*:IBO.{0,2}:.*", msg.content):
             self.mesajcilar[msg.author.id]["ibo_coin_pending"] += 1
 
+        # her paylasim icin risitas
         if msg.channel.category_id == idler.paylasimlar:
             self.risitas_coin_ver(msg.author.id, 1)
-            return
 
+        # bugun ne yaptim icin 500 risitas
         if msg.channel.id == Kanal.BugunNeYaptim.id:
             self.risitas_coin_ver(msg.author.id, 500)
             return
 
+    @command()
+    async def kgt(self, ctx: Context):
+        if type(ctx.channel) is not discord.Thread or ctx.channel.parent_id != Kanal.BugunNeYaptim.id:
+            #ctx.send(ephemeral=True, content=f"Komut sadece kendi başlığınızda <#{Kanal.BugunNeYaptim.id}> kanalında ve 23 saatte bir çalıştırılabilir.")
+            return
+
+        self.mango.uye(ctx.author.id).kgt()
+        await ctx.send(embed=embed_sohbet(self.bot.user, dis_ses=f"_Ansızın gölgeler içerisinden belli belirsiz şekilsiz bir varlık <@{ctx.author.id}> doğru yaklaştı ve gövdesine ulaştığında yerden yukarıya yükselerek sarmal bir şekilde tozla duman olup etrafa saçıldı._"))
 
     @loop(seconds=15)
     async def guncelle(self):

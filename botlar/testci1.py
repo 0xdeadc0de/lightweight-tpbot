@@ -23,7 +23,7 @@ class Testci1(Cogcu):
     async def chuckping(self, ctx):
         await ctx.send(f'chuck pong')
 
-    @command()
+    @slash_command()
     @Kanal.TpbotTest1.mi()
     async def test(self, ctx):
         await ctx.send("sadece tpbottest1 kanalinda calisir")

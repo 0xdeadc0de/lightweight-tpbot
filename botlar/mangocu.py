@@ -1,5 +1,6 @@
 from alayina_gider import ortamaBirBak
 import pymongo
+import datetime
 
 class Mangocu:
 
@@ -19,13 +20,14 @@ class Mangocu:
 
 
     class Cuzdan:
-        def __init__(self, rcc: int, rsc: int, ibo: int, rccp: int, rscp: int, ibop) -> None:
+        def __init__(self, rcc: int, rsc: int, ibo: int, rccp: int, rscp: int, ibop: int, kgt: int) -> None:
             self.ricardo = rcc
             self.risitas = rsc
             self.ibo = ibo
             self.pending_ricardo = rccp
             self.pending_risitas = rscp
             self.pending_ibo = ibop
+            self.kgt = kgt
     class Uye:
         def __init__(self, id: int, mangocu) -> None:
             self.id = str(id)
@@ -37,6 +39,20 @@ class Mangocu:
             return self.mangocu.uyeyi_guncelle(self.id, sorgu)
         def ver(self, nitelik: str, nicelik: int):
             return self.mangocu.uyeyi_guncelle(self.id, {"$inc": {nitelik: nicelik}})
+        def ez(self, nitelik: str, nicelik: int):
+            return self.mangocu.uyeyi_guncelle(self.id, {"$set": {nitelik: nicelik}})
+
+        def kgt(self):
+            kullanici = self.bul()
+            kgt = kullanici.get("kgt") or 0
+            simdi = int(datetime.datetime.utcnow().timestamp())
+            sure = 23 * 60 * 60
+            if simdi < sure + kgt:
+                return False
+            self.ez("kgt", simdi)
+            self.ver("karanlik_guc_", 1)
+            return True
+
         def cuzdan(self):
             kullanici = self.bul()
             rcc = 0; rsc = 0; rccp = 0; rscp = 0
@@ -47,6 +63,7 @@ class Mangocu:
                 rccp = kullanici.get("ricardo_coin_pending") or 0
                 rscp = kullanici.get("risitas_coin_pending") or 0
                 ibop = kullanici.get("ibo_coin_pending") or 0
+                kgt = kullanici.get("karanlik_guc") or 0
             return Mangocu.Cuzdan(rcc, rsc, ibo, rccp, rscp, ibop)
 
     def uye(self, id: int):
