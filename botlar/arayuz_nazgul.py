@@ -26,7 +26,7 @@ Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını san
         async def _2(self, button, interaction: discord.Interaction):
             await interaction.response.send_message(
                 ephemeral=True,
-                embed=embed_sohbet(self.bot.user, balon=
+                embed=embed_sohbet(self.bot.user, konusma=
 """Öncelikle sihirli bir kart oynamak için yeterli gücün olduğuna emin olmalısın.
 
 Daha sonra kart numaranı belirledikten sonra /kart yazıp oynamak istediğin kart numarasını yazmalısın.
