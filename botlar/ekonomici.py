@@ -25,7 +25,7 @@ class Ekonomici(Cogcu):
 
     def risitas_coin_ver(self, id: int, adet: int):
         id = str(id)
-        self.mango.uyeyi_guncelle(id, {
+        self.mango.uyeyi_yarat_guncelle(id, {
             "$inc": {"risitas_coin_pending": adet}})
 
     @Cog.listener()
@@ -140,7 +140,7 @@ class Ekonomici(Cogcu):
             await ctx.send("Bekleyen coin'iniz bulunmamaktadır.")
             return
         
-        self.mango.uyeyi_guncelle(ctx.author.id, {
+        self.mango.uyeyi_yarat_guncelle(ctx.author.id, {
             "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0, "ibo_coin_pending": 0}, 
             "$inc": {"ricardo_coin": cuzdan.pending_ricardo, "risitas_coin": cuzdan.pending_risitas, "ibo_coin": cuzdan.pending_ibo}})
         await ctx.send(embed=embed_sohbet(self.bot.user,
