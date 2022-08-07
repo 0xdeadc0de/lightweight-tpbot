@@ -46,7 +46,7 @@ class Mangocu:
                 ibo = kullanici.get("ibo_coin") or 0
                 rccp = kullanici.get("ricardo_coin_pending") or 0
                 rscp = kullanici.get("risitas_coin_pending") or 0
-                ibop = kullanici.get("ibo_pending") or 0
+                ibop = kullanici.get("ibo_coin_pending") or 0
             return Mangocu.Cuzdan(rcc, rsc, ibo, rccp, rscp, ibop)
 
     def uye(self, id: int):

@@ -6,7 +6,7 @@ from alayina_gider import Cogcu, TurkProgramcilar, Kanal, embed_sohbet, sunucu_u
 from discord.ext.commands import *
 from discord.ext.tasks import *
 from mangocu import Mangocu
-from copy import copy
+import re
 
 import random
 
@@ -20,7 +20,7 @@ class Ekonomici(Cogcu):
         global first
         if not first: return; first = False
         self.mango = Mangocu()
-        self.mesajcilar = defaultdict(int)
+        self.mesajcilar = defaultdict(lambda: defaultdict(int))
         self.guncelle.start()
 
     def risitas_coin_ver(self, id: int, adet: int):
@@ -62,8 +62,10 @@ class Ekonomici(Cogcu):
             if msg.thread and sans(.5):
                 ricardo_coin += 1
 
-            self.mesajcilar[msg.author.id] += ricardo_coin
+            self.mesajcilar[msg.author.id]["ricardo_coin_pending"] += ricardo_coin
 
+        if sans(.5) and re.match(".*:IBO.{0,2}:.*", msg.content):
+            self.mesajcilar[msg.author.id]["ibo_coin_pending"] += 1
 
         if msg.channel.category_id == idler.paylasimlar:
             self.risitas_coin_ver(msg.author.id, 1)
@@ -74,15 +76,14 @@ class Ekonomici(Cogcu):
             return
 
 
-    @loop(minutes=1)
+    @loop(seconds=15)
     async def guncelle(self):
         if len(self.mesajcilar) == 0:
             return
-        kopya = copy(self.mesajcilar)
-        self.mesajcilar = defaultdict(int)
         self.mango.user.bulk_write(
-            [pymongo.UpdateOne({"id": str(id)}, {'$inc': {"ricardo_coin_pending": coin}}, upsert=True) for id, coin in kopya.items()] 
+            [pymongo.UpdateOne({"id": str(id)}, {'$inc': pending}, upsert=True) for id, pending in self.mesajcilar.items()] 
         )
+        self.mesajcilar = defaultdict(lambda: defaultdict(int))
 
     async def _bakiye(self, ctx: discord.ApplicationContext, id=None):
         cuzdan = self.mango.uye(id).cuzdan()
@@ -92,7 +93,7 @@ class Ekonomici(Cogcu):
             return
 
         await ctx.send(embed=embed_sohbet(self.bot.user, 
-            f"`{uye.display_name}`k adlı üyenin hesap dökümü aşağıda belirtilmiştir.",
+            f"`{uye.display_name}` adlı üyenin hesap dökümü aşağıda belirtilmiştir.",
             ozellikler={"Ricardo (RCC)": cuzdan.ricardo, "Risitas (RSC)": cuzdan.risitas, "İbo (IBO)": cuzdan.ibo},
             resim="https://i.imgur.com/T9rS8qU.png"
         ))
@@ -101,7 +102,7 @@ class Ekonomici(Cogcu):
     @command()
     @TurkProgramcilar()
     @Kanal.BotKomutlar.mi()
-    @cooldown(1, 60, BucketType.user)
+    @cooldown(1, 15, BucketType.user)
     async def bakiye(self, ctx):
         """sahip olunan Ricardo (RCC) ve Risitas (RSC) coin'leri gösterir"""
         await self._bakiye(ctx, ctx.message.author.id)
@@ -120,7 +121,7 @@ class Ekonomici(Cogcu):
     @command()
     @TurkProgramcilar()
     @Kanal.BotKomutlar.mi()
-    @cooldown(1, 60, BucketType.user)
+    @cooldown(1, 15, BucketType.user)
     async def paraciklar(self, ctx: discord.ApplicationContext):
         """Bekleyen Ricardo (RCC) ve Risitas (RSC) coin'leri toplar"""
         cuzdan = self.mango.uye(ctx.author.id).cuzdan()
