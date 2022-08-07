@@ -1,8 +1,10 @@
 from enum import Enum
+from discord.ext.tasks import *
 from discord.ext.commands import *
 import discord
 import time
 import os
+import random
 import asyncio
 
 def embed_sohbet(sahis: discord.User, dis_ses="", balon=None, konusma=None, konusmalar=[], resim=None, ozellikler={}):
@@ -237,6 +239,20 @@ class Tpbot(Bot):
 
     async def on_ready(self):
         self.gunluk("atis serbest", self.user)
+        self.statu_guncelle.start()
+        
+    @loop(seconds=15)
+    async def statu_guncelle(self):
+
+        secim=random.chice([
+            "Türk Programcılar discord sunucusuna hoşgeldin!",
+            "Programlama öğrenmek için harika bir gün!",
+            "Hemen programlamaya başla!",
+            "Hayalindeki uygulamayı geliştirmek için yazılım öğren!",
+            "Gurur duyacağın bir program üretmek için daha neyi bekliyorsun?",
+            "Şimdi yeni birşeyler öğrenme zamanı!"
+        ])
+        await self.change_presence(activity=discord.Game(name=secim))
 
         
 cogbotlar : dict[str, Tpbot] = {}
