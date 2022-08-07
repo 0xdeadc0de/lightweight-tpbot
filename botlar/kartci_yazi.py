@@ -46,7 +46,7 @@ kartlar = [
     CardText(CardTitle["Yossi Kohen"],
         CardRarity.İhtişamlı,
         "Yahudi is adami Yossi Kohen cok fazla guler ve bunun sonucunda dusman yapmis oldugu saldirinin aynisini kendi hanesine uygular. Ayni zamanda Yossi Kohen firsat buldukca duzenli tras oldugu icin dusmanin uzerinde bulunan iyilestirmelerden Oyuncu ayni sekilde faydalanir",
-        "https://cdn.discordapp.com/attachments/842470001155899430/842499112858419200/1395444_306438912828769_165980884_n.png"
+        "https://i.imgur.com/tauumAv.png"
     ),
     CardText(CardTitle["8 Top"],
         CardRarity.Yaygın,
@@ -83,19 +83,19 @@ kartlar = [
     CardText(CardTitle["Tivorlu İsmail"],
         CardRarity.Esrarengiz,
         "Tivorlu Ismail Hela Vela Velvela adli eserini canlandirmaya baslar. Hay Masallah dedikten sonra Zih der ve Aaaa diye yukselmeye baslar. Rakip 20 hasar alir. Tivorlu Ismail Aaaaa nakaratini tekrarladikca oyuncu yazi tura atar. Her yazi ardina tekrar yazi tura atar ve rakibine 10 hasar verir. Oyuncu yazi turayi 3 kere kombolama hakkinda sahiptir. Eger oyuncu 3 kere yazi tutturursa Ismail Hay masallah diyip parcasini bitirir ve Oyuncu kendine 20 hasar verir.",
-        "https://media.discordapp.net/attachments/829256056156586044/840294047314739210/tumblr_m38mn15UyX1qfltf6o1_r2_2501.gif"
+        "https://media3.giphy.com/media/wHshvtykRrWps6mRd9/giphy.gif?cid=790b7611188bc1540c6cf34302e94666ad4e84a640e886b5&rid=giphy.gif&ct=g"
     ),
 
     # 15
     CardText(CardTitle["ChangerBöyle"],
         CardRarity.Destansı,
         "Karsi rakibin herhangi bir kartini taklit edebilir.",
-        "https://cdn.discordapp.com/attachments/842470001155899430/847973979326382090/unknown.png"
+        "https://i.imgur.com/zdpOsfj.png"
     ),
     CardText(CardTitle["Tatar Ramazan"],
         CardRarity.Esrarengiz,
         "Yazi tura at. Yazi gelirse dusmana 40 hasar yapistir.",
-        "https://cdn.discordapp.com/attachments/842470001155899430/855528889660997692/insanlarin-uzerine-sag-tiklayip-ozellik-gormek_205223.png"
+        "https://i.imgur.com/Cphcq5a.png"
     ),
     CardText(CardTitle["TP Moderatörlerin gazabı"],
         CardRarity.Destansı,
@@ -132,7 +132,7 @@ kartlar = [
     CardText(CardTitle[":IBOY:"],
         CardRarity.Güzide,
         "Oyuncu TP sunucusunda en çok kullanılan emojiyi atar 1 kart çeker ve rakip 10 hasar alır. Oyuncu :IBOY: kartını ard ardına spamlaması durumunda her bir oynayış başı kartın hasarı 10 artar. Kart en fazla 30 hasara ulaşabilir.",
-        "https://cdn.discordapp.com/attachments/842470001155899430/902335657274376192/unknown.png"
+        "https://i.imgur.com/uJf8aiE.png"
     ),
     CardText(CardTitle["HainBöyle"],
         CardRarity.Destansı,
@@ -243,7 +243,7 @@ kartlar = [
     CardText(CardTitle["@everyone"],
         CardRarity.Güzide,
         "İki oyuncu sunucuda atılan everyone etiketinden dolayı bildirim alırlar. Kartı oynayan oyuncu yeni bir kart çeker.",
-        "https://cdn.discordapp.com/emojis/725714391642931260.gif"
+        "https://media0.giphy.com/media/a62MfY4TCAnXHwo8sj/giphy.gif?cid=790b7611742fbc440854cebc082ac6bfaf4cdb773b1b0086&rid=giphy.gif&ct=s"
     ),
     CardText(CardTitle["Etiket"],
         CardRarity.Yaygın,
@@ -270,7 +270,7 @@ kartlar = [
     CardText(CardTitle[":IBOYD:"],
         CardRarity.Güzide,
         "Oyuncu TP sunucusunda en çok kullanılan emojinin geliştirilmiş versiyonunu atar ve :IBOY: kartını ansızın maksimum gücüne ulaştırır.",
-        "https://cdn.discordapp.com/emojis/861852478499979284.png"
+        "https://i.imgur.com/UzJRAnZ.png"
     ),
     CardText(CardTitle["Tempolu Ördek"],
         CardRarity.Güzide,
@@ -292,7 +292,7 @@ kartlar = [
     CardText(CardTitle["Yazık kafana"],
         CardRarity.Yaygın,
         "???",
-        "https://cdn.discordapp.com/emojis/821646589905993768.png"
+        "https://i.imgur.com/jfzKiVa.png"
     ),
     CardText(CardTitle[":YES:"],
         CardRarity.Destansı,
