@@ -47,7 +47,7 @@ class Mangocu:
 
     class Deste:
         def __init__(self, kullanici, deste={}) -> None:
-            self.mango = Mangocu.sikleton()
+            self.mangocu = Mangocu.sikleton()
             self.deste=deste
             self.kullanici=kullanici
 
@@ -56,7 +56,7 @@ class Mangocu:
 
         def varsa_azalt(self, no: int):
             """kart varsa bir azaltir ve true doner"""
-            return None != self.mango.bir_uye_filtrele_guncelle(
+            return None != self.mangocu.bir_uye_filtrele_guncelle(
                 #{"id": self.kullanici["id"], "deste": {no: {"$gt": 0}}},
                 #{"$inc", {"deste": {no: -1}}}
                 {"id": self.kullanici["id"], f"kart_{no}": {"$gt": 0}},
@@ -70,12 +70,29 @@ class Mangocu:
 
         def bul(self):
             return self.mangocu.uyeyi_bul(self.id)
+        def varmi(self, nitelik: str, nicelik: int=1):
+            return None != self.mangocu.user.find_one({"id": self.id, nitelik: {"$gte": nicelik}})
+
         def guncelle(self, sorgu):
             return self.mangocu.uyeyi_yarat_guncelle(self.id, sorgu)
-        def ver(self, nitelik: str, nicelik: int):
+        def ver(self, nitelik: str, nicelik: int = 1):
             return self.mangocu.uyeyi_yarat_guncelle(self.id, {"$inc": {nitelik: nicelik}})
+        def hepsini_ver(self, nitel_nicel):
+            return self.mangocu.uyeyi_yarat_guncelle(self.id, {"$inc": nitel_nicel})
+            
         def ez(self, nitelik: str, nicelik: int):
             return self.mangocu.uyeyi_yarat_guncelle(self.id, {"$set": {nitelik: nicelik}})
+
+        def varsa_azalt(self, nitelik: str, nicelik: int = 1):
+            return None != self.mangocu.bir_uye_filtrele_guncelle(
+                {"id": self.id, nitelik: {"$gte": nicelik}},
+                {"$inc": {nitelik: -1*nicelik}}
+            )
+        def hepsi_varsa_azalt(self, nitel_nicel):
+            return None != self.mangocu.bir_uye_filtrele_guncelle(
+                {"id": self.id}|{nitelik: {"$gte": nicelik} for nitelik, nicelik in nitel_nicel.items()},
+                {"$inc": {nitelik: -1*nicelik for nitelik, nicelik in nitel_nicel.items()}}
+            )
 
         def kgt(self):
             kullanici = self.bul()

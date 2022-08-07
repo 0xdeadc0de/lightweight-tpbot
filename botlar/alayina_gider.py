@@ -16,7 +16,7 @@ def embed_sohbet(sahis: discord.User, dis_ses="", balon=None, konusma=None, konu
     for konusma in konusmalar:
         embed.add_field(name=f"`{sahis.display_name}:`", value=f"{konusma}", inline=False)
     for nitel, nicel in ozellikler.items():
-        embed.add_field(name=f"`{nitel}:`", value=f"{nicel}", inline=True)
+        embed.add_field(name=f"`{nitel}`", value=f"{nicel}", inline=True)
     embed.set_thumbnail(url=sahis.avatar.url)
     #embed.set_author(name=sahis.display_name, icon_url=sahis.display_avatar.url)
     if resim is not None:

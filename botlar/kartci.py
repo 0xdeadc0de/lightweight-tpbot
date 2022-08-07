@@ -1,7 +1,8 @@
 from kartci_yazi import kartlar
 from kartci_nitelik import CardPlayKind, CardRarity, CardTitle
 import discord
-from alayina_gider import Cogcu, idler, cevap, Rol
+from mangocu import Mangocu
+from alayina_gider import Cogcu, idler, cevap, Rol, embed_sohbet
 from discord.commands import *
 from discord.ext.commands import *
 
@@ -46,7 +47,7 @@ def cardGosterGifli(no):
     return embed
 
 class Kartci(Cogcu):
-    @slash_command(guild_ids=[idler.sunucu], description="TP destesinden bir kart gösterir.")
+    @slash_command(guild_ids=[idler.sunucu], description="Koleksiyonundan bir kart gösterir.")
     @cooldown(1, 15, BucketType.user)
     @option("kart no", description="hangi kart gösterilecek?")
     async def kart(self, ctx: discord.ApplicationContext, no: int):
@@ -54,7 +55,10 @@ class Kartci(Cogcu):
             await ctx.respond("Geçersiz kart no", ephemeral=True)
         else:
             if ctx.channel.permissions_for(ctx.author).view_channel and ctx.channel.permissions_for(ctx.author).send_messages:
-                await ctx.respond("`"+ctx.author.display_name + " bir kart gösterdi.`", embeds=[cardGosterGifli(no)],ephemeral=False)
+                if Mangocu.sikleton().uye(ctx.author.id).varmi(f"kart_{no}"):
+                    await ctx.respond("`"+ctx.author.display_name + " bir kart gösterdi.`", embeds=[cardGosterGifli(no)],ephemeral=False)
+                else:
+                    await ctx.respond("Destenizde belirtilen numaradaki karttan yok", ephemeral=True)
             else:
                 await ctx.respond("Bu kanala kart gönderemezsiniz", ephemeral=True)
 
@@ -67,6 +71,25 @@ class Kartci(Cogcu):
         else:
             await ctx.respond(embeds=[cardGosterEmbed(no)],ephemeral=True)
     
+    
+    @slash_command(guild_ids=[idler.sunucu], description="Kart koleksiyonuna göz at.")
+    @cooldown(1, 15, BucketType.user)
+    async def koleksiyon(self, ctx: discord.ApplicationContext):
+        uye=Mangocu.sikleton().uye(ctx.author.id).bul()
+        if uye is None:
+            await ctx.respond("Koleksiyonunuz boş", ephemeral=True)
+            return
+
+        koleksiyon={kartlar[no-1].baslik+f"({no})": uye.get(f"kart_{no}") for no in range(1, 1+len(kartlar)) if uye.get(f"kart_{no}")}
+        if len(koleksiyon)==0:
+            await ctx.respond("Koleksiyonunuz boş", ephemeral=True)
+            return
+
+        await ctx.respond(ephemeral=True, embed=embed_sohbet(self.bot.user, 
+                    dis_ses=f"Koleksiyonunuzda bulunan kartlar:", 
+                    ozellikler=koleksiyon))
+    
+
     @slash_command(guild_ids=[idler.sunucu], description="TP destesine gözat.")
     async def deste(self, ctx):
         await cevap(ctx)("```css\n"+"\n".join([str(k+1)+". "+v.baslik for k, v in enumerate(kartlar)])+"```", ephemeral=True)
