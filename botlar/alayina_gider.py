@@ -244,7 +244,7 @@ class Tpbot(Bot):
     @loop(seconds=15)
     async def statu_guncelle(self):
 
-        secim=random.chice([
+        secim=random.choice([
             "Türk Programcılar discord sunucusuna hoşgeldin!",
             "Programlama öğrenmek için harika bir gün!",
             "Hemen programlamaya başla!",
