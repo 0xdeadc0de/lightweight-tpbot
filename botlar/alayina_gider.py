@@ -22,7 +22,6 @@ def embed_sohbet(sahis: discord.User, dis_ses="", balon=None, konusma=None, konu
     if resim is not None:
         embed.set_image(url=resim)
     return embed
-        
 
 def cevap(ctx):
     if type(ctx) is discord.interactions.Interaction:
@@ -98,7 +97,9 @@ class Kanal:
     class GununSorusu:
         id = 875276994949054554
         mi = Kanal.mi(id)
-
+    class Gunce:
+        id = 1005894357905317958
+        mi = Kanal.mi(id)
     class Bumperado:
         id = 782742548052574239
         mi = Kanal.mi(id)

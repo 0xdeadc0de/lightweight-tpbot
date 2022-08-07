@@ -24,9 +24,10 @@ class Testci1(Cogcu):
         await ctx.send(f'chuck pong')
 
     @slash_command()
+    @cooldown(1, 15, BucketType.user)
     @Kanal.TpbotTest1.mi()
-    async def test(self, ctx):
-        await ctx.send("sadece tpbottest1 kanalinda calisir")
+    async def test(self, ctx: discord.ApplicationContext, uye: discord.Member):
+        await ctx.respond("sadece tpbottest1 kanalinda calisir secilen uye:"+uye.display_name)
 
 def main():
     Testci1("TPBOT_TOKEN_TEST", Testci1.__name__.lower())
