@@ -97,7 +97,7 @@ class Ekonomici(Cogcu):
             return
 
         await ctx.send(embed=embed_sohbet(self.bot.user, 
-            f"{uye.display_name} adlı üyenin {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'i bulunmaktadır.",
+            f"`{uye.display_name}`k adlı üyenin {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'i bulunmaktadır.",
             ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
             resim="https://i.imgur.com/T9rS8qU.png"
         ))
@@ -127,7 +127,7 @@ class Ekonomici(Cogcu):
     @Kanal.BotKomutlar.mi()
     @cooldown(1, 60, BucketType.user)
     async def paraciklar(self, ctx: discord.ApplicationContext):
-        """Bekleye Ricardo (RCC) ve Risitas (RSC) coin'leri toplar"""
+        """Bekleyen Ricardo (RCC) ve Risitas (RSC) coin'leri toplar"""
         kullanici = self.mango.uyeyi_bul(ctx.author.id)
         ricardo = 0
         risitas = 0
@@ -142,7 +142,7 @@ class Ekonomici(Cogcu):
             "$set": {"ricardo_coin_pending": 0, "risitas_coin_pending": 0}, 
             "$inc": {"ricardo_coin": ricardo, "risitas_coin": risitas}})
         await ctx.send(embed=embed_sohbet(self.bot.user,
-            f"`{ctx.author.display_name} bekleyen {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'lerini topladı.`",
+            f"`{ctx.author.display_name}` bekleyen {ricardo} Ricardo (RCC) ve {risitas} Risitas (RSC) coin'lerini topladı.",
             ozellikler={"Ricardo (RCC)": ricardo, "Risitas (RSC)": risitas},
             resim="https://c.tenor.com/rD9QG-wudPoAAAAC/cat-cashier.gif"
         ))
