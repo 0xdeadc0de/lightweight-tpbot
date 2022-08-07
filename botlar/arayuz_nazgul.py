@@ -11,8 +11,7 @@ class ArayuzNazgul(Arayuzcu):
     def embedler(self):
         return([embed_sohbet(self.bot.user, 
             dis_ses=f"""_Yol üzerinde yürürken birden etrafını karanlıklar sardı ve yolunu süliyeti belirsiz bir atlı sürücü kesiverdi.
-Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını sana doğru çevirdi ve gülümsedi_
-`{self.bot.user.display_name}: ?`""", )])
+Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını sana doğru çevirdi ve gülümsedi_""", )])
 
     class Arayuz(discord.ui.View):
         def __init__(self, *items, timeout = 180, bot = None):
