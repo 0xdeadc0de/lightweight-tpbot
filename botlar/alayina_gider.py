@@ -10,9 +10,9 @@ def embed_sohbet(sahis: discord.User, dis_ses="", balon=None, konusma=None, konu
     if balon is not None:
         embed.add_field(name=f"`{sahis.display_name}:`", value=f"```{balon}```", inline=False)
     if konusma is not None:
-        embed.add_field(name=f"`{sahis.display_name}:`", value=f"{balon}", inline=False)
+        embed.add_field(name=f"`{sahis.display_name}:`", value=f"{konusma}", inline=False)
     for konusma in konusmalar:
-        embed.add_field(name=f"`{sahis.display_name}:`", value=f"{balon}", inline=False)
+        embed.add_field(name=f"`{sahis.display_name}:`", value=f"{konusma}", inline=False)
     for nitel, nicel in ozellikler.items():
         embed.add_field(name=f"`{nitel}:`", value=f"{nicel}", inline=True)
     embed.set_thumbnail(url=sahis.avatar.url)
@@ -83,6 +83,9 @@ class Kanal:
         mi = Kanal.mi(id)
     class MerhabaDunya:
         id = 900650376762626078
+        mi = Kanal.mi(id)
+    class EmojiKatalogu:
+        id = 906543847033688084
         mi = Kanal.mi(id)
     class SoruSor:
         id = 1003249327117979739
