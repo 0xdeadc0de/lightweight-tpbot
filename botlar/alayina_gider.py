@@ -233,8 +233,10 @@ class Tpbot(Bot):
     def gunluk(self, *mesajlar):
         gunluk(self.token_ismi, *mesajlar)
 
+    first = True
     async def on_ready(self):
         self.gunluk("atis serbest", self.user)
+        if not self.first: return; self.first = False
         self.statu_guncelle.start()
         
     @loop(seconds=15)
