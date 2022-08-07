@@ -5,9 +5,20 @@ import datetime
 class Mangocu:
 
     def __init__(self) -> None:
+        if self.sik is not None:
+            raise Exception("hassikleton")
+        self.sik = self
         self.cluster = pymongo.MongoClient(ortamaBirBak("TPBOT_MONGO"))
         self.db      = self.cluster["mongodb_tp"]
         self.user    = self.db["users"]
+        
+
+    sik = None
+    @staticmethod
+    def sikleton():
+        if Mangocu.sik is None:
+            Mangocu()
+        return Mangocu.sik
 
     def uyeyi_bul(self,id: str):
         """uyeyi bulur yoksa None doner"""

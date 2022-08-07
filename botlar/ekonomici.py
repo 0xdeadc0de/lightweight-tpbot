@@ -19,7 +19,7 @@ class Ekonomici(Cogcu):
     async def on_ready(self):
         global first
         if not first: return; first = False
-        self.mango = Mangocu()
+        self.mango = Mangocu.sikleton()
         self.mesajcilar = defaultdict(lambda: defaultdict(int))
         self.guncelle.start()
 
