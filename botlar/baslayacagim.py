@@ -26,7 +26,7 @@ class Baslayacagim(Cogcu):
 ################################################################################
 
     class AkisBaslangic(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -52,7 +52,7 @@ class Baslayacagim(Cogcu):
             ])
             
     class AkisParaKazanmak(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -66,7 +66,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class IsBulmak(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -88,7 +88,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class BuyukFirmalar(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -106,7 +106,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class Startup(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -124,7 +124,7 @@ class Baslayacagim(Cogcu):
             ])
             
     class WebStartup(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -138,7 +138,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class MobilUygulama(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -152,7 +152,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class Kurumsal(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -168,7 +168,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class WebIsBulmak(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -182,7 +182,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class KimeCalisacagim(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -196,7 +196,7 @@ class Baslayacagim(Cogcu):
             ])
             
     class YuksekPotansiyel(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -212,7 +212,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class FavoriOyuncak(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -228,7 +228,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class FikrinVarMi(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -242,7 +242,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class Tercihim(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([
@@ -260,7 +260,7 @@ class Baslayacagim(Cogcu):
             ])
 
     class Arabam(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             super().__init__(*items, timeout=timeout)
             self.bot = bot
         @secenekOlusturucu([

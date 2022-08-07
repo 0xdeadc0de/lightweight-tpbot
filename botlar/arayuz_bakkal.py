@@ -20,7 +20,7 @@ Elindeki bir keseden hışırtılı bir şekilde teker teker çıkarttığı mad
         )])
 
     class Arayuz(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             self.bot = bot
             super().__init__(*items, timeout=timeout)
 

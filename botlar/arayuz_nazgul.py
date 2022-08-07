@@ -14,7 +14,7 @@ class ArayuzNazgul(Arayuzcu):
 Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını sana doğru çevirdi ve gülümsedi_""", )])
 
     class Arayuz(discord.ui.View):
-        def __init__(self, *items, timeout = 180, bot = None):
+        def __init__(self, *items, timeout = None, bot = None):
             self.bot = bot
             super().__init__(*items, timeout=timeout)
 
