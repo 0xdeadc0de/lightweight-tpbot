@@ -4,6 +4,7 @@ from discord.ext.commands import *
 import discord
 from baslayacagim import Baslayacagim
 from kartci import Kartci
+from bakkal import Bakkal
 from ekonomici import Ekonomici
 
 class ArayuzBakkal(Arayuzcu):
@@ -98,6 +99,10 @@ Elinde ne kadar dinar olduğunu saymak istiyorsan <#{Kanal.BotKomutlar.id}> diya
 
 Unutma, öncelikle kazandığın dinarların aktarımını ` !{Ekonomici.paraciklar.name} ` komutuyla yapmalısın aksi taktirde eksik sayım çıkacaktır.
 """))
+    
+        @discord.ui.button(label="Dükkana göz at", style=discord.ButtonStyle.blurple, row=1)
+        async def _3(self, button, interaction: discord.Interaction):
+            await Bakkal.bakkal(self, interaction)
 
 def main():
     ArayuzBakkal("TPBOT_TOKEN_BAKKAL", ArayuzBakkal.__name__.lower())
