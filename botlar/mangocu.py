@@ -103,7 +103,7 @@ class Mangocu:
                 return False
             self.ez("kgt", simdi)
             self.ver("karanlik_guc_")
-            self.ver("ricardo_coin_pending", 500)
+            self.ver("risitas_coin_pending", 500)
             return True
 
         def cuzdan(self):
