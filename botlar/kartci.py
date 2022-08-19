@@ -1,6 +1,7 @@
 from kartci_yazi import kartlar
 from kartci_nitelik import CardPlayKind, CardRarity, CardTitle
 import discord
+import math
 from mangocu import Mangocu
 from alayina_gider import Cogcu, idler, cevap, Rol, embed_sohbet
 from discord.commands import *
@@ -71,7 +72,7 @@ class Kartci(Cogcu):
         else:
             await ctx.respond(embeds=[cardGosterEmbed(no)],ephemeral=True)
     
-    
+    en_uzun = None
     @slash_command(guild_ids=[idler.sunucu], description="Kart koleksiyonuna göz at.")
     @cooldown(1, 15, BucketType.user)
     async def koleksiyon(self, ctx: discord.ApplicationContext):
@@ -80,14 +81,26 @@ class Kartci(Cogcu):
             await ctx.respond("Koleksiyonunuz boş", ephemeral=True)
             return
 
-        koleksiyon={kartlar[no-1].baslik+f"({no})": uye.get(f"kart_{no}") for no in range(1, 1+len(kartlar)) if uye.get(f"kart_{no}")}
+        if Kartci.en_uzun is None:
+            Kartci.en_uzun = len(max(kartlar, key=lambda x: len(x.baslik)).baslik)
+        koleksiyon=[
+            (kartlar[no-1].baslik.ljust(Kartci.en_uzun)+f"({no}): ".rjust(3+4) + str(uye.get(f"kart_{no}") or '-').ljust(3))
+            for no in range(1, 1+len(kartlar))
+        ]
         if len(koleksiyon)==0:
             await ctx.respond("Koleksiyonunuz boş", ephemeral=True)
             return
+        ayir = 2
+        alan = math.ceil(len(koleksiyon)/ayir)
+        ayrik = [koleksiyon[x*alan:(x+1)*alan] for x in range(ayir)]
+        birlesik = [" | ".join(ayri) for ayri in zip(*ayrik)]
 
-        await ctx.respond(ephemeral=True, embed=embed_sohbet(self.bot.user, 
-                    dis_ses=f"Koleksiyonunuzda bulunan kartlar:", 
-                    ozellikler=koleksiyon))
+        alan /= ayir #yetecektir discord 1024 limiti icin...
+        alan = int(alan)
+        butun = ["```"+("\n".join(birlesik[x*alan:(x+1)*alan]))+"```" for x in range(ayir)]
+
+        for x in butun:
+            await ctx.respond(ephemeral=True, content=x)
     
 
     @slash_command(guild_ids=[idler.sunucu], description="TP destesine gözat.")
