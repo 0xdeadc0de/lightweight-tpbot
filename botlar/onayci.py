@@ -74,9 +74,13 @@ class Onayci(Cogcu):
     @Rol.AsistanEditorKurucuMu()
     async def caliskanim(self, ctx: discord.ApplicationContext, message: discord.message.Message):
         
+        await ctx.send(f"Onay veriliyor... <@{message.author.id}>")
+        
         try:
             await self.onay_ver(message.author)
             msg="onay verildi: "
+            if ctx.channel.parent_id == Kanal.MerhabaDunya.id:
+                await ctx.channel.archive(locked=True)
         except:
             msg="onay verilemedi: "
 
