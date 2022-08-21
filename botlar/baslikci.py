@@ -10,7 +10,7 @@ class Baslikci(Cogcu):
             return
         if 120 != ctx.channel.slowmode_delay:
             return
-        await ctx.create_thread(name="Yorumlar 👉")
+        await ctx.create_thread(name="Yorumlar 👉", auto_archive_duration=60)
 
 def main():
     Baslikci("TPBOT_TOKEN_NAZGUL_1", Baslikci.__name__.lower())
