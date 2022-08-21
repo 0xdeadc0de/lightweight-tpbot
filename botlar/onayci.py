@@ -75,18 +75,16 @@ class Onayci(Cogcu):
     async def caliskanim(self, ctx: discord.ApplicationContext, message: discord.message.Message):
         
         await ctx.send(f"Onay veriliyor... <@{message.author.id}>")
-        
+        msg=message.author.display_name
         try:
             await self.onay_ver(message.author)
-            msg="onay verildi: "
+            msg +=" onay verildi"
+            await ctx.respond(msg, ephemeral=True)
             if ctx.channel.parent_id == Kanal.MerhabaDunya.id:
                 await ctx.channel.archive(locked=True)
         except:
-            msg="onay verilemedi: "
-
-        msg+=message.author.display_name
-        
-        await ctx.respond(msg, ephemeral=True)
+            msg +=" onay verilemedi "
+            await ctx.respond(msg, ephemeral=True)
 
 def main():
     Onayci("TPBOT_TOKEN_NAZGUL_1", Onayci.__name__.lower())
