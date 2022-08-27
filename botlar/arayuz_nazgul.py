@@ -18,11 +18,11 @@ Simsiyah pelerin ve çarşafa bürünmüş bu varlık yavaşçana suratını san
             self.bot = bot
             super().__init__(*items, timeout=timeout)
 
-        @discord.ui.button(label="Programlamaya nasıl başlarım yardımcı olabilir misin?", style=discord.ButtonStyle.secondary, row=0)
+        @discord.ui.button(label="Programlamaya nasıl başlarım yardımcı olabilir misin?", style=discord.ButtonStyle.secondary, row=1)
         async def _1(self, button, interaction: discord.Interaction):
             await Baslayacagim.baslayacagim(self, interaction)
 
-        @discord.ui.button(label="Sihirli bir kartı nasıl oynayabilirim?", style=discord.ButtonStyle.secondary, row=1)
+        @discord.ui.button(label="Sihirli bir kartı nasıl oynayabilirim?", style=discord.ButtonStyle.blurple, row=0)
         async def _2(self, button, interaction: discord.Interaction):
             class Devam(discord.ui.View):
                 def __init__(self, *items, timeout = None, bot = None):
@@ -52,7 +52,7 @@ Kartı oynamadan önce göz atmak için ` /gozat ` komutunu kullanabilirsin. Bö
 
 Kart numaraları hakkında bilgi almak için ` /deste ` komutunu kullanabilirsin veya istediğin zaman bana sorabilirsin."""))
 
-        @discord.ui.button(label="Sihirli kart numaraları hakkında bilgin var mı?", style=discord.ButtonStyle.secondary, row=1)
+        @discord.ui.button(label="Sihirli kart numaraları hakkında bilgin var mı?", style=discord.ButtonStyle.secondary, row=0)
         async def _3(self, button, interaction: discord.Interaction):
             await Kartci.deste(self, interaction)
 
