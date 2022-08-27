@@ -242,7 +242,7 @@ class Tpbot(Bot):
         except:
             pass
         
-    @loop(seconds=15)
+    @loop(seconds=60)
     async def statu_guncelle(self):
 
         secim=random.choice([
