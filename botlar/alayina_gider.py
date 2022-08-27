@@ -251,7 +251,16 @@ class Tpbot(Bot):
             "Hemen programlamaya başla!",
             "Hayalindeki uygulamayı geliştirmek için yazılım öğren!",
             "Gurur duyacağın bir program üretmek için daha neyi bekliyorsun?",
-            "Şimdi yeni birşeyler öğrenme zamanı!"
+            "Şimdi yeni birşeyler öğrenme zamanı!",
+            "Bir gün daha ve en az bir satır yeni kod yazmalısın",
+            "Tüm diyarlara giden yol programlamadan geçer!",
+            "Program yazdım on yirmi ton gönlüm ister C++ Python!",
+            "Bu yazıyı okuyabiliyorsan baya yaklaşmışsın demektir.",
+            "İyi yazılan kod selülit yapmaz.",
+            "Âlem hacker olmuş kod yazan yok!",
+            "Rampaların ustasıyım, C++ hastasıyım.",
+            "Âşıksan vur saza, Türk programcıysan bas gaza.",
+            "Yolda hızlıyım aşkta yavaş, Türk Programcıyım ben arkadaş.",
         ])
         await self.change_presence(activity=discord.Game(name=secim))
         
