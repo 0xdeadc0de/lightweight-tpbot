@@ -237,7 +237,10 @@ class Tpbot(Bot):
     async def on_ready(self):
         self.gunluk("atis serbest", self.user)
         if not self.first: return; self.first = False
-        self.statu_guncelle.start()
+        try:
+            self.statu_guncelle.start()
+        except:
+            pass
         
     @loop(seconds=15)
     async def statu_guncelle(self):
