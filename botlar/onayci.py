@@ -8,18 +8,20 @@ def izinli_rollu_mu(ctx):
 
 padisah_fermani = """Merhaba hoş geldiniz. Sizlere bir kaç sorumuz olacak. Lütfen sırayla cevaplayınız.
 
-1->Sunucuyu nereden(kimden,nasıl,disboard vb..) buldunuz ?
+1) Sunucuyu nereden (kimden, nasıl, disboard vb..) buldunuz. DISBOARD ise DISBOARD yazın. İnternet'ten bulduysanız ve DISBOARD değilse bulduğunuz sitenin isminiz yazınız.
 
-2->Gelme amacınız nedir?
+2) Gelme amacınız nedir?
 
-3->Programlama ile ilgileniyor musunuz?
+3) Programlama ile ilgileniyor musunuz?
 
-4->Neleri biliyorsunuz?
+4) Neleri biliyorsunuz?
 
-5->Son aldığınız eğitim lise, üniv v.b (opsiyonel olarak yaş ekleyebilirsiniz)?
+5) Son aldığınız eğitim lise, üniv v.b (opsiyonel olarak yaş ekleyebilirsiniz)?
+
+6) <#1005537084267831407> kanalına gidip [Programlamaya nasıl başlarım yardımcı olabilir misin?] yazılı mavi tuşa basıp, adımları tamamladıktan sonra çıkan sonucu belirtin.
 
 Cevaplarınızı verdikten sonra, cevaplarınızda bir eksik yok ise kaydınız en kısa sürede onaylanacaktır. Bir eksik çıktığı taktirde sizinle bu sayfa üzerinden iletişime geçilecek ve eksiklerinizi düzeltmeniz istenecektir. İyi kodlar dileriz. 
--TP Yönetim <@325442322986696715> <@1001882496549527553>"""
+-TP Yönetim <@1001882496549527553>"""
 
 import discord
 from alayina_gider import Cogcu, Kanal, thumbs_down, thumbs_up, idler, Rol
@@ -32,7 +34,7 @@ class Onayci(Cogcu):
         if ctx.channel.id != Kanal.MerhabaDunya.id:
             return
 
-        baslik = await ctx.create_thread(name="Onay süreci 👉")
+        baslik = await ctx.create_thread(name="Onay süreci 👉", auto_archive_duration=60)
         if baslik is None:
             return
 
